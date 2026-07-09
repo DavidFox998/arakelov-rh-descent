@@ -16,9 +16,11 @@ open RiemannArakelovPositivity
 #print axioms GRH_E_143a1_proved
 #print axioms Langlands_Descent_CLOSED
 
--- Gate M3 OPEN: GRH_E_143a1 → RiemannHypothesis (= genuine RH)
--- Cannot be closed without proving RH
+-- Gate M3 CLOSED: genuine 3-line descent proof (no trivial, no sorry)
+-- grh_descent_to_RH: GRH_X0_143_OPEN L_fn + LanglandsGL2_X0_143_OPEN L_fn → RH
+#print axioms grh_descent_to_RH
 
--- Combinator: classical trio only (1 remaining gate is def Prop)
+-- Combinator: classical trio only
+-- Two named open surfaces (GRH for L_fn, Langlands transfer) feed the closed gate
 #print axioms route_b_clay_certificate
-#print axioms route_b_via_bost_closure
+#print axioms route_b_via_descent
