@@ -14,7 +14,7 @@ open RiemannArakelovPositivity
 
 -- Gate M2 CLOSED (mathematical): Weil explicit formula + contradiction
 -- The Weil bound is USED in the proof, not discarded.
--- Named open surface inputs: ExplicitFormula_ZeroSum_OPEN, ZeroOffCriticalLine_Contradiction_OPEN
+-- Named open surface inputs: ExplicitFormula_ZeroSum_Surface, ZeroOffCriticalLine_Contradiction_Surface
 #print axioms Langlands_Descent_CLOSED
 #print axioms rpow_half_lt_rpow_beta
 
