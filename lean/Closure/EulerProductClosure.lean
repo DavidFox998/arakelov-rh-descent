@@ -58,10 +58,10 @@ def CPS_EulerProduct : Prop :=
 
 /-! ── §1. Sub-surface (1): Deligne factorization ─────────────────────── -/
 
-/-- L_143a1_local p s — the local Euler factor of L(s,f_143a1) at prime p.
-    Explicitly: L_143a1_local p s = (1 - α_p·p^{-s})(1 - β_p·p^{-s})^{-1}
-    (the inverse of the Euler polynomial).
-    Absent from Mathlib.  Introduced as variable; no opaque. -/
+-- L_143a1_local p s — the local Euler factor of L(s,f_143a1) at prime p.
+-- Explicitly: L_143a1_local p s = (1 - α_p·p^{-s})(1 - β_p·p^{-s})^{-1}
+-- (the inverse of the Euler polynomial).
+-- Absent from Mathlib.  Introduced as variable; no opaque.
 variable (L_143a1_local : ℕ → ℂ → ℂ)
 
 /-- Deligne_AlphaFactorization — atomic sub-surface (1) for EulerProduct.

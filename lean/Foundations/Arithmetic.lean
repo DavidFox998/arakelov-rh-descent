@@ -1,6 +1,7 @@
 import Mathlib.Data.Nat.Factorization.Basic
 import Mathlib.Data.Finset.Basic
 import Mathlib.Algebra.Squarefree.Basic
+import Mathlib.NumberTheory.Divisors
 
 /-!
 # Arithmetic of X₀(143)

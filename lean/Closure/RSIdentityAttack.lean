@@ -23,9 +23,25 @@ import Mathlib.Analysis.SpecialFunctions.Pow.Real
 namespace RHKimSarnakDescent.Closure.RSIdentityAttack
 open Complex Real
 
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
 
 variable (RankinSelberg_L : ℂ → ℂ)
 variable (L_sym2_143     : ℂ → ℂ)
+variable (L_143a1 : ℂ → ℂ)
+
+/-- RS_Identity: ζ(s) = L(s, f×f̄) / L(s, sym²f) (Euler factor identity). -/
+def RS_Identity (RankinSelberg_L L_sym2_143 : ℂ → ℂ) : Prop :=
+  ∀ s : ℂ, riemannZeta s = RankinSelberg_L s / L_sym2_143 s
+
+/-- RS_EulerFactorIdentity: Euler factor identity for each prime. -/
+def RS_EulerFactorIdentity (RankinSelberg_L L_sym2_143 : ℂ → ℂ) : Prop :=
+  ∀ p : ℕ, p.Prime → p ∣ 143 → ∀ s : ℂ, 1 < s.re →
+  ∃ (α_p β_p : ℂ),
+    Complex.abs α_p = Real.sqrt p ∧
+    Complex.abs β_p = Real.sqrt p ∧
+    RankinSelberg_L s = riemannZeta s * L_sym2_143 s
 
 /-! -- §1.  Alpha-beta norm witnesses ---------------------------------------- -/
 

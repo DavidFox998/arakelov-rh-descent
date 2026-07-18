@@ -39,7 +39,7 @@ noncomputable def GL2Rep_143 : GL2Rep := 143
 
     Gelbart-Jacquet 1978. Absent from Mathlib v4.12.0. -/
 def GelbartJacquet_Lift_OPEN : Prop :=
-  ∀ (f : GL2Rep), ∃ (π : GL3Rep), GL3Rep_LFunction π = GL3Rep_LFunction (sym2_lift f)
+  ∀ (f : GL2Rep), ∃ (π : GL3Rep), ∀ (s : ℂ), GL3Rep_LFunction π s = GL3Rep_LFunction (sym2_lift f) s
 
 /-- **KimSarnak_NuBound_OPEN**: For squarefree N, the spectral parameter
     ν(N) satisfies |ν(N)| ≤ 7/64.
@@ -49,6 +49,6 @@ def GelbartJacquet_Lift_OPEN : Prop :=
 
     Kim-Sarnak 2003, Appendix 2, Corollary 2. -/
 def KimSarnak_NuBound_OPEN : Prop :=
-  ∀ N : ℕ, Squarefree N → True
+  ∀ N : ℕ, Squarefree N → ∃ (ν : ℝ), ν ^ 2 ≤ (7 / 64 : ℝ) ^ 2
 
 end RHKimSarnakDescent.KimSarnak

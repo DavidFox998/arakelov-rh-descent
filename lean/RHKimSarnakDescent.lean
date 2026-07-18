@@ -92,7 +92,9 @@ theorem C_S14_143_gt_tau : C_S14_143 > 2 * Real.sqrt 13 := by
 
 theorem bost_connes_threshold :
     2 * Real.sqrt ((X₀_143).genus : ℝ) < (320 : ℝ) := by
-  have hg : ((X₀_143).genus : ℝ) = 13 := by norm_num
+  have hg : ((X₀_143).genus : ℝ) = 13 := by
+    show ((13 : ℕ) : ℝ) = 13
+    rw [X₀_143_genus]; norm_num
   rw [hg]; linarith [sqrt13_lt_4]
 
 -- ===========================================================================
@@ -129,7 +131,9 @@ variable (S_weil : ℝ → ℂ)
     SORRY: 0.  Axiom footprint: {propext, Classical.choice, Quot.sound}. -/
 theorem Gate_K1_BostConnes_CLOSED :
     C_S14_143 > 2 * Real.sqrt ((X₀_143).genus : ℝ) := by
-  have hg : ((X₀_143).genus : ℝ) = 13 := by norm_num
+  have hg : ((X₀_143).genus : ℝ) = 13 := by
+    show ((13 : ℕ) : ℝ) = 13
+    rw [X₀_143_genus]
   rw [hg]
   exact C_S14_143_gt_tau
 

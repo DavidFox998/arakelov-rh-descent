@@ -49,15 +49,15 @@ def ZeroFreeRegion_OPEN (L_fn : ℂ → ℂ) : Prop :=
     Euler product and Phragmén-Lindelöf, which are open surfaces.)
 
     SORRY: 0. -/
-theorem zero_free_from_nonvanishing
+/-- **zero_free_from_nonvanishing** — OPEN SURFACE.
+    If L(1, f) ≠ 0, then a zero-free region exists.
+    The proof requires Phragmén-Lindelöf and analytic continuation.
+    STATUS: OPEN. -/
+def zero_free_from_nonvanishing
     (L_fn : ℂ → ℂ)
     (h : L_at_1_nonzero_OPEN L_fn)
     (h_euler : ∀ s : ℂ, 1 < s.re → L_fn s ≠ 0) :
-    ∃ δ : ℝ, 0 < δ ∧ ∀ s : ℂ, 1 - δ < s.re → s.re ≤ 1 → L_fn s ≠ 0 := by
-  -- The Euler product gives non-vanishing for Re(s) > 1.
-  -- The analytic continuation + L(1) ≠ 0 gives non-vanishing near s = 1.
-  -- This requires Phragmén-Lindelöf, which is an open surface.
-  -- Here we state the structural implication.
-  exact ⟨1, by norm_num, fun s _ _ => h_euler s (by linarith)⟩
+    Prop :=
+  ∃ δ : ℝ, 0 < δ ∧ ∀ s : ℂ, 1 - δ < s.re → s.re ≤ 1 → L_fn s ≠ 0
 
 end RHKimSarnakDescent.GRH

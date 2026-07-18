@@ -50,18 +50,9 @@ theorem C_S14_143_gt_tau : C_S14_143 > 2 * Real.sqrt 13 := by
     stated as open surfaces in the Closure/ files. -/
 noncomputable def L_143a1 : ℂ → ℂ := fun s => ((5759 : ℂ) / 10000) * (s - 1)
 
-/-- The Weil explicit formula error term S_weil(T).
-
-    This function appears in the Weil explicit formula for ζ(s):
-      Σ_ρ T^ρ = -S_weil(T) + (geometric terms)
-
-    The Weil bound |S_weil(T)| ≤ C·T/log T is the key analytic input
-    to Route B. It is an open surface (SelbergTrace_WeilBound in the
-    main file).
-
-    S_weil is declared as a variable in the main file so that all
-    theorems are conditional on any choice of S_weil. -/
--- S_weil is a variable in the main namespace, not defined here.
+-- The Weil explicit formula error term S_weil(T) is declared as a variable
+-- in the main namespace (RHKimSarnakDescent.lean), not defined here.
+-- All theorems are conditional on any choice of S_weil.
 
 /-- The first nonzero Laplacian eigenvalue λ₁(X₀(N)).
 

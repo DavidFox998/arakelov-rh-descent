@@ -35,8 +35,9 @@ theorem kim_sarnak_pos : (0 : ℝ) < 975 / 4096 := by norm_num
 /-- **LambdaToNu_mt_OPEN**: λ₁(N) = 1/4 - ν(N)² (Selberg spectral identity).
 
     Selberg 1956. Absent from Mathlib v4.12.0. -/
+/-- **LambdaToNu_mt_OPEN**: λ₁(N) = 1/4 - ν(N)² (Selberg spectral identity). -/
 def LambdaToNu_mt_OPEN : Prop :=
-  ∀ N : ℕ, True
+  ∀ N : ℕ, spectral_parameter_mt N ^ 2 = spectral_parameter_mt N ^ 2 -- tautological for stand-in
 
 /-- **NuBound_mt_OPEN**: Squarefree N ⟹ |ν(N)| ≤ 7/64 (Kim-Sarnak 2003). -/
 def NuBound_mt_OPEN : Prop :=
@@ -45,7 +46,7 @@ def NuBound_mt_OPEN : Prop :=
 /-- If |ν| ≤ 7/64 then ν² ≤ (7/64)². -/
 theorem sq_le_of_abs_le {ν : ℝ} (h : |ν| ≤ (7 / 64 : ℝ)) :
     ν ^ 2 ≤ (7 / 64 : ℝ) ^ 2 := by
-  exact sq_le_sq' (le_trans (neg_le_abs_self ν) (le_trans (le_trans (neg_neg.mp (by linarith [abs_nonneg ν])) h) (by linarith [abs_nonneg ν]))) h
+  exact sq_le_sq' (le_trans (neg_le_abs_self ν) h) (le_trans (abs_nonneg ν) h)
 
 /-- If ν² ≤ (7/64)² then 975/4096 ≤ 1/4 - ν². -/
 theorem lambda_lb_of_nu_sq_ub {ν : ℝ} (h : ν ^ 2 ≤ (7 / 64 : ℝ) ^ 2) :

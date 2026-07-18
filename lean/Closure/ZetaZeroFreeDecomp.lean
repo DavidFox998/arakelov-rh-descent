@@ -70,12 +70,20 @@ namespace RHKimSarnakDescent.Closure.ZetaZeroFreeDecomp
 -- Local standalone declarations (Route B standalone, imports only Mathlib)
 -- ===========================================================================
 
+variable (DirichChar_143 : Type)
+variable (twistedL_143a1 : DirichChar_143 → ℂ → ℂ)
 variable (newform_143a1_L : ℂ → ℂ)
+variable (L_143a1 : ℂ → ℂ)
+variable (L_sym2_143 : ℂ → ℂ)
 
 /-- CPS_FunctionalEquation: twisted L-function satisfies functional equation. -/
 def CPS_FunctionalEquation : Prop :=
   ∀ χ : DirichChar_143,
   ∃ ε : ℂ, ‖ε‖ = 1 ∧ ∀ s : ℂ, twistedL_143a1 χ s = ε * twistedL_143a1 χ (2 - s)
+
+/-- CPS_EulerProduct: L-function nonzero for Re(s) > 3/2. -/
+def CPS_EulerProduct : Prop :=
+  ∀ s : ℂ, (3:ℝ)/2 < s.re → L_143a1 s ≠ 0
 
 /-- CPS_BoundedStrips: L-function bounded in vertical strips. -/
 def CPS_BoundedStrips : Prop :=
@@ -87,18 +95,11 @@ def CPS_ConverseAndUniqueness : Prop :=
   CPS_FunctionalEquation → CPS_EulerProduct → CPS_BoundedStrips →
   ∀ s : ℂ, L_143a1 s = newform_143a1_L s
 
-/-- CPS_EulerProduct: L-function nonzero for Re(s) > 3/2. -/
-def CPS_EulerProduct : Prop :=
-  ∀ s : ℂ, (3:ℝ)/2 < s.re → L_143a1 s ≠ 0
-
 
 
 /-! ── §1. Variables ────────────────────────────────────────────── -/
 
-variable (L_sym2_143     : ℂ → ℂ)
-variable (L_143a1        : ℂ → ℂ)
-variable (DirichChar_143 : Type)
-variable (twistedL_143a1 : DirichChar_143 → ℂ → ℂ)
+
 
 /-! ── §2. ZetaZeroFree sub-gaps ──────────────────────────── -/
 
