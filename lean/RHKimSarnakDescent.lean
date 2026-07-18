@@ -274,15 +274,39 @@ theorem route_b_clay_certificate
     { gate_selberg := h_selberg, gate_viol := h_viol, gate_lang := h_lang }
 
 -- ===========================================================================
--- §8. Terminal theorem
+-- §8. Terminal theorem (conditional)
 -- ===========================================================================
 
-/-- **rh_unconditional**: Riemann Hypothesis via Kim-Sarnak spectral descent (Route B).
-    Classical trio only. -/
-theorem rh_unconditional : RiemannHypothesis := by
-  exact route_b_clay_certificate L_143a1
-    SelbergTrace_WeilBound
-    OffCriticalZero_WeilViolation
-    LanglandsTransfer
+/-- **RouteB_Bridge** — the open surface of Route B.
+
+    Combines the three named open surfaces whose discharge would make
+    Route B unconditional:
+      1. SelbergTrace_WeilBound: Selberg trace → Weil bound (BC95 Thm 6)
+      2. OffCriticalZero_WeilViolation: off-critical zero violates Weil bound
+      3. LanglandsTransfer: ζ zeros → L-function zeros (GL₂ functoriality)
+
+    Mathematical content (all genuinely open, absent from Mathlib v4.12.0):
+      - Selberg trace formula for Γ₀(143) (~40pp)
+      - Weil explicit formula zero-sum analysis (~15pp)
+      - Langlands GL₂ functoriality for X₀(143) (~25pp)
+
+    This is a `def : Prop` (not an axiom, not a sorry, not an opaque).
+    It names the mathematical surface without assuming it. -/
+def RouteB_Bridge (L_fn : ℂ → ℂ) : Prop :=
+  SelbergTrace_WeilBound ∧
+  OffCriticalZero_WeilViolation L_fn ∧
+  LanglandsTransfer L_fn
+
+/-- **Route B terminal theorem (conditional)**: If the three open surfaces
+    hold, then the Riemann Hypothesis follows.
+
+    The combinators (Gates K1-K3) are all PROVED. The mathematical content
+    is in the undischarged hypotheses of `RouteB_Bridge`.
+
+    SORRY: 0. Axiom footprint: {propext, Classical.choice, Quot.sound}. -/
+theorem RH_from_route_b
+    (L_fn : ℂ → ℂ) (h : RouteB_Bridge L_fn) :
+    _root_.RiemannHypothesis :=
+  route_b_clay_certificate L_fn h.1 h.2.1 h.2.2
 
 end RHKimSarnakDescent
