@@ -41,7 +41,8 @@ theorem lambda_lb_of_nu_sq_ub {ν : ℝ} (h : ν ^ 2 ≤ (7 / 64 : ℝ) ^ 2) :
 /-- If |ν| ≤ 7/64, then ν² ≤ (7/64)². -/
 theorem sq_le_of_abs_le {ν : ℝ} (h : |ν| ≤ (7 / 64 : ℝ)) :
     ν ^ 2 ≤ (7 / 64 : ℝ) ^ 2 := by
-  exact sq_le_sq' (le_trans (neg_le_abs_self ν) h) (le_trans (abs_nonneg ν) h)
+  rw [← sq_abs, ← sq_abs]
+  exact sq_le_sq' h (abs_nonneg _)
 
 /-- **LambdaToNu_OPEN**: λ₁(N) = 1/4 - ν(N)² (Selberg spectral identity).
 

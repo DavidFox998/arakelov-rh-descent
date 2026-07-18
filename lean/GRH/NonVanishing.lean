@@ -42,13 +42,6 @@ def L_at_1_nonzero_OPEN (L_fn : ℂ → ℂ) : Prop :=
 def ZeroFreeRegion_OPEN (L_fn : ℂ → ℂ) : Prop :=
   ∃ δ : ℝ, 0 < δ ∧ ∀ s : ℂ, 1 - δ < s.re → s.re ≤ 1 → L_fn s ≠ 0
 
-/-- **Zero-free from non-vanishing** (PROVED combinator):
-
-    If L(1, f) ≠ 0, then a zero-free region exists.
-    (This is the structural implication; the analytic proof requires the
-    Euler product and Phragmén-Lindelöf, which are open surfaces.)
-
-    SORRY: 0. -/
 /-- **zero_free_from_nonvanishing** — OPEN SURFACE.
     If L(1, f) ≠ 0, then a zero-free region exists.
     The proof requires Phragmén-Lindelöf and analytic continuation.
