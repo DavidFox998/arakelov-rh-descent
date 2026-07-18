@@ -9,3 +9,7 @@ require mathlib from git
 @[default_target]
 lean_lib RHKimSarnakDescent where
   srcDir := "lean"
+  roots := #[`RHKimSarnakDescent, `Foundations.Arithmetic, `Foundations.Objects,
+            `Foundations.BQF_Standalone, `KimSarnak.SpectralGap, `KimSarnak.GelbartJacquet,
+            `KimSarnak.MainTheorem, `Selberg.TraceFormula, `Langlands.Descent,
+            `Langlands.RankinSelberg, `GRH.GRHToRH, `GRH.NonVanishing]
