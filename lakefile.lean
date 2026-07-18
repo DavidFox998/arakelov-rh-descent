@@ -12,4 +12,15 @@ lean_lib RHKimSarnakDescent where
   roots := #[`RHKimSarnakDescent, `Foundations.Arithmetic, `Foundations.Objects,
             `Foundations.BQF_Standalone, `KimSarnak.SpectralGap, `KimSarnak.GelbartJacquet,
             `KimSarnak.MainTheorem, `Selberg.TraceFormula, `Langlands.Descent,
-            `Langlands.RankinSelberg, `GRH.GRHToRH, `GRH.NonVanishing]
+            `Langlands.RankinSelberg, `GRH.GRHToRH, `GRH.NonVanishing,
+            `Closure.BoundedStripsClosure, `Closure.ConverseUniquenessClosure,
+            `Closure.EulerProductClosure, `Closure.FunctionalEquationClosure,
+            `Closure.L_sym2_NonVanishingClosure, `Closure.RSIdentityAttack,
+            `Closure.RSIdentityFullAttack, `Closure.RamanujanFactorizationClosed,
+            `Closure.ResidueArgumentClosure, `Closure.RouteBMasterReduction,
+            `Closure.SelbergTraceSubClosure, `Closure.SelbergWeilClosure,
+            `Closure.SineGrowthSubClosure, `Closure.WeilBoundSubClosure,
+            `Closure.WeilBoundToGRHClosure, `Closure.WeilExplicitSubClosure,
+            `Closure.WeilGateAttack, `Closure.ZFRGateAttack,
+            `Closure.ZeroFreeStripSubClosure, `Closure.ZetaZeroFreeClosure,
+            `Closure.ZetaZeroFreeDecomp]

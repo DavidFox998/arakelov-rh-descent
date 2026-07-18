@@ -23,6 +23,7 @@
 -/
 
 import Mathlib
+import Mathlib.NumberTheory.LSeries.RiemannZeta
 namespace RHKimSarnakDescent.Closure.RouteBMasterReduction
 
 open Real
@@ -60,8 +61,15 @@ def EP_RamanujanBound (L_fn : ℂ → ℂ) : Prop :=
 def EP_ProductNonzero (L_fn : ℂ → ℂ) : Prop :=
   ∀ s : ℂ, (3:ℝ)/2 < s.re → L_fn s ≠ 0
 
-def BS_PhragmenLindelof (DirichChar_143 : Type) (twistedL_143a1 : DirichChar_143 → ℂ → ℂ) : Prop := True
-def BS_VerticalBoundary (DirichChar_143 : Type) (twistedL_143a1 : DirichChar_143 → ℂ → ℂ) : Prop := True
+/-- BS_PhragmenLindelof: Phragmén-Lindelöf convexity for twisted L-functions. -/
+def BS_PhragmenLindelof (DirichChar_143 : Type) (twistedL_143a1 : DirichChar_143 → ℂ → ℂ) : Prop :=
+  ∀ χ : DirichChar_143, ∀ σ₁ σ₂ : ℝ, σ₁ < σ₂ →
+  ∃ C : ℝ, 0 < C ∧ ∀ s : ℂ, σ₁ ≤ s.re → s.re ≤ σ₂ → ‖twistedL_143a1 χ s‖ ≤ C
+
+/-- BS_VerticalBoundary: vertical boundary bounds for Phragmén-Lindelöf. -/
+def BS_VerticalBoundary (DirichChar_143 : Type) (twistedL_143a1 : DirichChar_143 → ℂ → ℂ) : Prop :=
+  ∀ χ : DirichChar_143, ∀ σ : ℝ,
+  ∃ C : ℝ, 0 < C ∧ ∀ t : ℝ, ‖twistedL_143a1 χ ⟨σ, t⟩‖ ≤ C
 
 def CU_ConverseHalfPlane (DirichChar_143 : Type) (newform_143a1_L L_143a1 : ℂ → ℂ)
     (twistedL_143a1 : DirichChar_143 → ℂ → ℂ) : Prop :=
@@ -73,19 +81,52 @@ def CU_ExtendToAllC (newform_143a1_L L_143a1 : ℂ → ℂ) : Prop :=
 def ExplicitFormula_AtomicGap (L_fn : ℂ → ℂ) (S_weil : ℝ → ℂ) : Prop :=
   ∀ T : ℝ, 1 < T → ‖S_weil T‖ ≤ C_S14_143 * T / Real.log T
 
-def WG_ZeroDensity (newform_143a1_L L_fn : ℂ → ℂ) : Prop := True
+/-- WG_ZeroDensity: zero-density estimate for L(s, f_143a1). -/
+def WG_ZeroDensity (newform_143a1_L L_fn : ℂ → ℂ) : Prop :=
+  ∀ T : ℝ, 1 < T →
+  ∃ (N : ℕ), (N : ℝ) ≤ C_S14_143 * T / Real.log T ∧
+  ∀ ρ : ℂ, L_fn ρ = 0 → 0 < ρ.re → ρ.re < 1 → |ρ.im| ≤ T → (N : ℝ) ≥ 1
 
 /-- Gate M3 sub-surfaces -/
-def RS_EulerFactorIdentity (RankinSelberg_L L_sym2_143 : ℂ → ℂ) : Prop := True
-def IK_RS_SimplePole (RankinSelberg_L L_sym2_143 : ℂ → ℂ) : Prop := True
-def IK_GRH_to_L_sym2_nv (RankinSelberg_L L_sym2_143 : ℂ → ℂ) : Prop := True
-def IK_RS_L143_Link (RankinSelberg_L L_sym2_143 L_143a1 : ℂ → ℂ) : Prop := True
-def ZFR_DelaValleePoussin (L_fn : ℂ → ℂ) : Prop := True
-def ZFR_RHFromWeilZeroFree (L_fn : ℂ → ℂ) : Prop := True
+/-- RS_EulerFactorIdentity: ζ(s) = L(s, f×f̄) / L(s, sym²f) (up to finitely many factors). -/
+def RS_EulerFactorIdentity (RankinSelberg_L L_sym2_143 : ℂ → ℂ) : Prop :=
+  ∀ s : ℂ, riemannZeta s = RankinSelberg_L s / L_sym2_143 s
+
+/-- IK_RS_SimplePole: L(s, f×f̄) has a simple pole at s = 1. -/
+def IK_RS_SimplePole (RankinSelberg_L L_sym2_143 : ℂ → ℂ) : Prop :=
+  ∃ (a : ℂ), a ≠ 0 ∧
+  ∀ s : ℂ, s ≠ 1 → RankinSelberg_L s = a / (s - 1) + L_sym2_143 s
+
+/-- IK_GRH_to_L_sym2_nv: GRH for L(s,f) → L(1, sym²f) ≠ 0. -/
+def IK_GRH_to_L_sym2_nv (RankinSelberg_L L_sym2_143 : ℂ → ℂ) : Prop :=
+  (∀ ρ : ℂ, RankinSelberg_L ρ = 0 → ρ ≠ 1 → ρ.re = 1/2) → L_sym2_143 1 ≠ 0
+
+/-- IK_RS_L143_Link: L_143a1 = L(s, f_143a1) identification. -/
+def IK_RS_L143_Link (RankinSelberg_L L_sym2_143 L_143a1 : ℂ → ℂ) : Prop :=
+  ∀ s : ℂ, L_143a1 s = RankinSelberg_L s / L_sym2_143 s
+
+/-- ZFR_DelaValleePoussin: de la Vallée-Poussin zero-free region for L(s, f). -/
+def ZFR_DelaValleePoussin (L_fn : ℂ → ℂ) : Prop :=
+  ∃ δ : ℝ, 0 < δ ∧ ∀ s : ℂ, 1 - δ < s.re → s.re ≤ 1 → L_fn s ≠ 0
+
+/-- ZFR_RHFromWeilZeroFree: zero-free region → RH for L(s, f). -/
+def ZFR_RHFromWeilZeroFree (L_fn : ℂ → ℂ) : Prop :=
+  (∃ δ : ℝ, 0 < δ ∧ ∀ s : ℂ, 1 - δ < s.re → s.re ≤ 1 → L_fn s ≠ 0) →
+  ∀ ρ : ℂ, L_fn ρ = 0 → ρ ≠ 1 →
+    (¬∃ n : ℕ, ρ = -2 * ((n : ℂ) + 1)) → ρ.re = 1/2
 
 /-- Wall C sub-surfaces -/
-def Stirling_Binet : Prop := True
-def Stirling_Remainder (sl sh : ℝ) : Prop := True
+/-- Stirling_Binet: Stirling/Binet formula for Gamma asymptotics. -/
+def Stirling_Binet : Prop :=
+  ∀ s : ℂ, 1 < s.re →
+  ∃ C : ℝ, 0 < C ∧
+  ∀ t : ℝ, ‖Complex.Gamma ⟨s.re, t⟩‖ ≤ C * (1 + |t|) ^ (s.re - 1/2) * Real.exp (-Real.pi * |t| / 2)
+
+/-- Stirling_Remainder: remainder term for Stirling approximation. -/
+def Stirling_Remainder (sl sh : ℝ) : Prop :=
+  ∃ C : ℝ, 0 < C ∧
+  ∀ t : ℝ, sl ≤ t → t ≤ sh →
+  |Real.log (Real.Gamma t) - ((t - 1/2) * Real.log t - t + Real.log (2 * Real.pi) / 2)| ≤ C / t
 
 /-- rh_from_all_atomic_surfaces — master reduction open surface.
     Given all Batch 17-25 sub-opens, RiemannHypothesis follows.

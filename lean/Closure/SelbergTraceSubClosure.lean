@@ -59,21 +59,17 @@ def WeilExplicitFormula_143 (SpectralParams_143 : ℕ → ℝ) (TestFn : ℝ →
 
 /-!
   ════════════════════════════════════════════════════════════════
-  CLOSURE: SelbergTrace_143
-  Witness spectral_sum = 0.  0 <= 14*T by linarith (T > 1 > 0).
+  OPEN SURFACE: SelbergTrace_143
+  The Weyl law N(T) ≤ 14·T for X₀(143) is an open surface.
+  The trivial witness spectral_sum = 0 was removed (vacuous).
   ════════════════════════════════════════════════════════════════ -/
 
-/-- close_SelbergTrace (PROVED, 0 sorry):
-    SelbergTrace_143 closed by trivial witness spectral_sum = 0.
-    Formal: 0 <= 14 * T because T > 1 implies 14 * T > 0.
-    Mathematical note: the actual Weyl counting function N(T) satisfies
-    N(T) <= 14*T for X_0(143) (Weyl law; index=168, genus=13).
-    Concrete Lean closure: SelbergTrace_Concrete (~25pp). -/
-theorem close_SelbergTrace (SpectralParams_143 : ℕ → ℝ)
-    (TestFn : ℝ → ℂ) :
-    SelbergTrace_143 SpectralParams_143 TestFn := by
-  intro _ T hT
-  exact ⟨0, by linarith⟩
+/-- close_SelbergTrace — REMOVED (was vacuous witness 0).
+    The surface SelbergTrace_143 remains OPEN.
+    Mathematical content: the Weyl counting function N(T) satisfies
+    N(T) ≤ 14·T for X_0(143) (Weyl law; index=168, genus=13).
+    Reference: Hejhal LNM 548, Theorem 2.1.
+    STATUS: OPEN (~25pp, Selberg trace formula for Fuchsian groups). -/
 
 /-!
   ════════════════════════════════════════════════════════════════
