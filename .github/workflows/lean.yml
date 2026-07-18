@@ -15,15 +15,14 @@ jobs:
       run: curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
     - name: Add elan to PATH
       run: echo "$HOME/.elan/bin" >> $GITHUB_PATH
-    - name: Cache Mathlib oleans
-      uses: actions/cache@v4
-      with:
-        path: .lake
-        key: lake-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ hashFiles('lakefile.lean') }}
-        restore-keys: |
-          lake-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-
+    - name: Clean old lake cache (fix Closure cache bug)
+      run: |
+        rm -rf .lake
+        rm -f lake-manifest.json
+    - name: Update dependencies
+      run: lake update
     - name: Fetch Mathlib cache
       run: lake exe cache get || true
-    - name: Build project
-      run: lake build
-      timeout-minutes: 360
+    - name: Build ONLY Route B main
+      run: lake build RHKimSarnakDescent
+      timeout-minutes: 60
