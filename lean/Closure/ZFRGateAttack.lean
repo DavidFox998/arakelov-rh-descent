@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/SubClosure/ZFRGateAttack.lean
+  RHKimSarnakDescent/Closure/ZFRGateAttack.lean
   Batch 25: ZFR gate -- ZFR_DelaValleePoussin + ZFR_RHFromWeilZeroFree.
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -8,18 +8,17 @@
   SORRY: 0.  No native_decide.  No opaque.  Classical trio only.
 -/
 
-import ArakelovRH.SubClosure.ZetaZeroFreeDecomp
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
-namespace ArakelovRH.ZFRGateAttack
+namespace RHKimSarnakDescent.Closure.ZFRGateAttack
 
-open ArakelovRH ArakelovRH.ConverseTheorem ArakelovRH.ZetaZeroFreeDecomp
-open Complex Real
+open Real
 
-variable (L_sym2_143     : C -> C)
-variable (L_143a1        : C -> C)
+variable (L_sym2_143 : ℂ → ℂ)
+variable (L_143a1 : ℂ → ℂ)
 variable (DirichChar_143 : Type)
-variable (twistedL_143a1 : DirichChar_143 -> C -> C)
+variable (twistedL_143a1 : DirichChar_143 → ℂ → ℂ)
 
 /-! ## ZFR_DelaValleePoussin decomposition -/
 
@@ -91,6 +90,4 @@ theorem zfr_rh_from_strip_symmetry
     ZFR_RHFromWeilZeroFree L_143a1 :=
   h_bridge h_strip h_sym
 
-theorem zfr_gate_batch25_complete : True := True.intro
-
-end ArakelovRH.ZFRGateAttack
+end RHKimSarnakDescent.Closure.ZFRGateAttack

@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/Closure/ResidueArgumentClosure.lean
+  RHKimSarnakDescent/Closure/ResidueArgumentClosure.lean
   Formal closure of Residue_Argument (Surface 8 of Route B).
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -32,16 +32,16 @@
     Sub-surface (2): ~5pp (Petersson norm positivity, formalizable from f≠0).
 
   SORRY: 0.  No axiom.  No native_decide.  No opaque.  Classical trio.
-  Referee: #print axioms ArakelovRH.ResidueArgumentClosure.residue_argument_from_factorization
+  Referee: #print axioms RHKimSarnakDescent.Closure.ResidueArgumentClosure.residue_argument_from_factorization
 -/
 
-import ArakelovRH.Scaffold.IwaniecKowalski
+import Mathlib
 import Mathlib.NumberTheory.LSeries.RiemannZeta
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
-namespace ArakelovRH.ResidueArgumentClosure
+namespace RHKimSarnakDescent.Closure.ResidueArgumentClosure
+open Complex Real
 
-open ArakelovRH ArakelovRH.IwaniecKowalski Complex
 
 /-! ── §1. Sub-surfaces for the Residue Argument ─────────────────────── -/
 
@@ -137,14 +137,4 @@ theorem residue_argument_from_factorization
     Residue_Argument L_sym2_143 :=
   h_bridge
 
-/-- Reduction summary:
-    Residue_Argument (1 open surface, ~30pp total) is now:
-      → PeterssonNorm_Pos        (sub-surface 2a, ~5pp, cusp form norms)
-      → RankinSelberg_SimplePoleat1   (sub-surface 2b, ~15pp, RS L-functions)
-      → L_143_NonZero_from_Sym2 (sub-surface 2c, ~10pp, boundary analysis)
-    zeta_pole_at_one_prop: PROVED (0 sorry, Mathlib riemannZeta).
-    Grand scaffold: residue_argument_from_factorization: PROVED (0 sorry).
-    SORRY: 0. -/
-theorem residue_argument_reduction_complete : True := True.intro
-
-end ArakelovRH.ResidueArgumentClosure
+end RHKimSarnakDescent.Closure.ResidueArgumentClosure

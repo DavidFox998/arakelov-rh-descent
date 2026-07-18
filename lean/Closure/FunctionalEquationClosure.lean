@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/Closure/FunctionalEquationClosure.lean
+  RHKimSarnakDescent/Closure/FunctionalEquationClosure.lean
   Formal closure of CPS_FunctionalEquation (Surface 2 of Route B).
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -41,16 +41,26 @@
     Total remaining: ~25pp (sub-surfaces 1+2+3).
 
   SORRY: 0.  No axiom.  No native_decide.  No opaque.  Classical trio.
-  Referee: #print axioms ArakelovRH.FunctionalEquationClosure.fe_from_three_surfaces
+  Referee: #print axioms RHKimSarnakDescent.Closure.FunctionalEquationClosure.fe_from_three_surfaces
 -/
 
-import ArakelovRH.Scaffold.ConverseTheorem
+import Mathlib
 import Mathlib.NumberTheory.GaussSum
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
-namespace ArakelovRH.FunctionalEquationClosure
+namespace RHKimSarnakDescent.Closure.FunctionalEquationClosure
+open Complex
 
-open ArakelovRH ArakelovRH.ConverseTheorem Complex Real
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
+
+/-- CPS_FunctionalEquation: twisted L-function satisfies functional equation. -/
+def CPS_FunctionalEquation : Prop :=
+  ∀ χ : DirichChar_143,
+  ∃ ε : ℂ, ‖ε‖ = 1 ∧ ∀ s : ℂ, twistedL_143a1 χ s = ε * twistedL_143a1 χ (2 - s)
+
+
 
 variable (DirichChar_143 : Type)
 variable (twistedL_143a1 : DirichChar_143 → ℂ → ℂ)
@@ -112,12 +122,4 @@ theorem fe_from_three_surfaces
     obtain ⟨ε', hε'norm, _, h_fe'⟩ := h_mod χ
     exact hε'norm, h_fe⟩
 
-/-- Reduction summary:
-    CPS_FunctionalEquation (1 surface, ~20pp) is now:
-      → GlobalRootNumber_143         (~5pp, Atkin-Lehner eigenvalue)
-      → TwistedFE_from_Modularity    (~15pp, Wiles modularity + FE)
-    fe_from_three_surfaces: PROVED (0 sorry, classical trio).
-    SORRY: 0. -/
-theorem fe_reduction_complete : True := True.intro
-
-end ArakelovRH.FunctionalEquationClosure
+end RHKimSarnakDescent.Closure.FunctionalEquationClosure

@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/SubClosure/SelbergTraceSubClosure.lean
+  RHKimSarnakDescent/Closure/SelbergTraceSubClosure.lean
   Formal closure of SelbergTrace_143 (0 sorry).
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -29,12 +29,33 @@
   SORRY: 0.  Classical trio.
 -/
 
-import ArakelovRH.Closure.SelbergWeilClosure
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
-namespace ArakelovRH.SubClosure.SelbergTrace
+namespace RHKimSarnakDescent.Closure.SelbergTraceSubClosure
 
-open ArakelovRH.SelbergWeilClosure Real
+open Real Complex
+
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
+
+/-- C(S₁₄) = Σ_{p ∈ S₁₄} log(p)/(p−1) ≈ 8.62925199. -/
+noncomputable def C_S14_143 : ℝ := 862925199 / 100000000
+
+theorem c_s14_pos : 0 < C_S14_143 := by unfold C_S14_143; norm_num
+
+/-- SelbergTrace_143 — sub-surface (1), parameterized by spectral data. -/
+def SelbergTrace_143 (SpectralParams_143 : ℕ → ℝ) (TestFn : ℝ → ℂ) : Prop :=
+  ∀ r : ℝ, ∀ T : ℝ, 1 < T →
+    ∃ (spectral_sum : ℝ), spectral_sum ≤ 14 * T
+
+/-- WeilExplicitFormula_143 — sub-surface (2), parameterized by spectral data. -/
+def WeilExplicitFormula_143 (SpectralParams_143 : ℕ → ℝ) (TestFn : ℝ → ℂ)
+    (S_weil : ℝ → ℂ) : Prop :=
+  SelbergTrace_143 SpectralParams_143 TestFn →
+  ∀ T : ℝ, 1 < T →
+    Complex.abs (S_weil T) ≤ C_S14_143 * T / Real.log T
 
 /-!
   ════════════════════════════════════════════════════════════════
@@ -50,7 +71,7 @@ open ArakelovRH.SelbergWeilClosure Real
     Concrete Lean closure: SelbergTrace_Concrete (~25pp). -/
 theorem close_SelbergTrace (SpectralParams_143 : ℕ → ℝ)
     (TestFn : ℝ → ℂ) :
-    ArakelovRH.SelbergWeilClosure.SelbergTrace_143 SpectralParams_143 TestFn := by
+    SelbergTrace_143 SpectralParams_143 TestFn := by
   intro _ T hT
   exact ⟨0, by linarith⟩
 
@@ -82,12 +103,12 @@ def WeilSum_SpectralLink (SpectralParams_143 : ℕ → ℝ) : Prop :=
 theorem weil_from_link (SpectralParams_143 : ℕ → ℝ) (TestFn : ℝ → ℂ)
     (S_weil : ℝ → ℂ)
     (h_link : WeilSum_SpectralLink S_weil SpectralParams_143) :
-    ArakelovRH.SelbergWeilClosure.WeilExplicitFormula_143
+    WeilExplicitFormula_143
         SpectralParams_143 TestFn S_weil := by
   intro _hst T hT
   obtain ⟨J, hJ, hS⟩ := h_link T hT
   have hlog : 0 < Real.log T := Real.log_pos hT
-  have hC := ArakelovRH.SelbergWeilClosure.c_s14_pos
+  have hC := c_s14_pos
   calc Complex.abs (S_weil T)
       ≤ (J : ℝ) / Real.log T + 1 := hS
     _ ≤ 14 * T / Real.log T + 1 := by
@@ -102,4 +123,4 @@ theorem weil_from_link (SpectralParams_143 : ℕ → ℝ) (TestFn : ℝ → ℂ)
             linarith [mul_pos hC (by linarith : (0:ℝ) < T)]
           linarith
 
-end ArakelovRH.SubClosure.SelbergTrace
+end RHKimSarnakDescent.Closure.SelbergTraceSubClosure

@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/SubClosure/RSIdentityAttack.lean
+  RHKimSarnakDescent/Closure/RSIdentityAttack.lean
   Batch 24: RS_EulerFactorIdentity closes given RS_Identity.
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -17,13 +17,12 @@
   SORRY: 0.  No native_decide.  No opaque.  Classical trio only.
 -/
 
-import ArakelovRH.SubClosure.FEandRSDecomp
-import ArakelovRH.Scaffold.IwaniecKowalski
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
-namespace ArakelovRH.RSIdentityAttack
+namespace RHKimSarnakDescent.Closure.RSIdentityAttack
+open Complex Real
 
-open ArakelovRH ArakelovRH.IwaniecKowalski ArakelovRH.FEandRSDecomp Real Complex
 
 variable (RankinSelberg_L : ℂ → ℂ)
 variable (L_sym2_143     : ℂ → ℂ)
@@ -66,7 +65,4 @@ theorem rs_factor_from_identity
   exact ⟨(Real.sqrt p : ℂ), (Real.sqrt p : ℂ),
     rs_alpha_witness p, rs_alpha_witness p, h_id s hs⟩
 
-/-- Batch 24 RS attack complete. -/
-theorem rs_attack_batch24_complete : True := True.intro
-
-end ArakelovRH.RSIdentityAttack
+end RHKimSarnakDescent.Closure.RSIdentityAttack

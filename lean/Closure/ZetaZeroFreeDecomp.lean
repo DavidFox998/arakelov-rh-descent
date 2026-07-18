@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/SubClosure/ZetaZeroFreeDecomp.lean
+  RHKimSarnakDescent/Closure/ZetaZeroFreeDecomp.lean
   Gate M3 IK + Gate M2 CPS: final atomic sub-gap decompositions.
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -61,13 +61,37 @@
   SORRY: 0. No native_decide. No opaque. Classical trio.
 -/
 
-import ArakelovRH.Scaffold.IwaniecKowalski
-import ArakelovRH.Scaffold.ConverseTheorem
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
-namespace ArakelovRH.ZetaZeroFreeDecomp
+namespace RHKimSarnakDescent.Closure.ZetaZeroFreeDecomp
 
-open ArakelovRH ArakelovRH.IwaniecKowalski ArakelovRH.ConverseTheorem Real
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
+
+variable (newform_143a1_L : ℂ → ℂ)
+
+/-- CPS_FunctionalEquation: twisted L-function satisfies functional equation. -/
+def CPS_FunctionalEquation : Prop :=
+  ∀ χ : DirichChar_143,
+  ∃ ε : ℂ, ‖ε‖ = 1 ∧ ∀ s : ℂ, twistedL_143a1 χ s = ε * twistedL_143a1 χ (2 - s)
+
+/-- CPS_BoundedStrips: L-function bounded in vertical strips. -/
+def CPS_BoundedStrips : Prop :=
+  ∀ χ : DirichChar_143, ∀ σ₁ σ₂ : ℝ, σ₁ < σ₂ →
+  ∃ C : ℝ, 0 < C ∧ ∀ s : ℂ, σ₁ ≤ s.re → s.re ≤ σ₂ → ‖twistedL_143a1 χ s‖ ≤ C
+
+/-- CPS_ConverseAndUniqueness: FE + EulerProduct + BoundedStrips → L = newform. -/
+def CPS_ConverseAndUniqueness : Prop :=
+  CPS_FunctionalEquation → CPS_EulerProduct → CPS_BoundedStrips →
+  ∀ s : ℂ, L_143a1 s = newform_143a1_L s
+
+/-- CPS_EulerProduct: L-function nonzero for Re(s) > 3/2. -/
+def CPS_EulerProduct : Prop :=
+  ∀ s : ℂ, (3:ℝ)/2 < s.re → L_143a1 s ≠ 0
+
+
 
 /-! ── §1. Variables ────────────────────────────────────────────── -/
 
@@ -277,6 +301,4 @@ theorem bs_bounded_from_pl
       (+ ZetaZeroFree original = these 2 + combinator.)
 
     SORRY: 0. -/
-theorem batch20_complete : True := True.intro
-
-end ArakelovRH.ZetaZeroFreeDecomp
+end RHKimSarnakDescent.Closure.ZetaZeroFreeDecomp

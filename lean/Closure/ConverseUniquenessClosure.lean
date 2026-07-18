@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/Closure/ConverseUniquenessClosure.lean
+  RHKimSarnakDescent/Closure/ConverseUniquenessClosure.lean
   Formal closure of CPS_ConverseAndUniqueness (Surface 5 of Route B).
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -42,19 +42,41 @@
       → Cremona_Multiplicity   (~10pp, strong multiplicity one)
 
   SORRY: 0.  No axiom.  No native_decide.  No opaque.  Classical trio.
-  Referee: #print axioms ArakelovRH.ConverseUniquenessClosure.converse_uniqueness_from_two
+  Referee: #print axioms RHKimSarnakDescent.Closure.ConverseUniquenessClosure.converse_uniqueness_from_two
 -/
 
-import ArakelovRH.Scaffold.ConverseTheorem
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
-namespace ArakelovRH.ConverseUniquenessClosure
+namespace RHKimSarnakDescent.Closure.ConverseUniquenessClosure
 
-open ArakelovRH ArakelovRH.ConverseTheorem
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
 
 variable (DirichChar_143 : Type)
-variable (newform_143a1_L : ℂ → ℂ)
 variable (twistedL_143a1 : DirichChar_143 → ℂ → ℂ)
+variable (newform_143a1_L : ℂ → ℂ)
+variable (L_143a1 : ℂ → ℂ)
+
+/-- CPS_FunctionalEquation: twisted L-function satisfies functional equation. -/
+def CPS_FunctionalEquation : Prop :=
+  ∀ χ : DirichChar_143,
+  ∃ ε : ℂ, ‖ε‖ = 1 ∧ ∀ s : ℂ, twistedL_143a1 χ s = ε * twistedL_143a1 χ (2 - s)
+
+/-- CPS_EulerProduct: L-function nonzero for Re(s) > 3/2. -/
+def CPS_EulerProduct : Prop :=
+  ∀ s : ℂ, (3:ℝ)/2 < s.re → L_143a1 s ≠ 0
+
+/-- CPS_BoundedStrips: L-function bounded in vertical strips. -/
+def CPS_BoundedStrips : Prop :=
+  ∀ χ : DirichChar_143, ∀ σ₁ σ₂ : ℝ, σ₁ < σ₂ →
+  ∃ C : ℝ, 0 < C ∧ ∀ s : ℂ, σ₁ ≤ s.re → s.re ≤ σ₂ → ‖twistedL_143a1 χ s‖ ≤ C
+
+/-- CPS_ConverseAndUniqueness: FE + EulerProduct + BoundedStrips → L = newform. -/
+def CPS_ConverseAndUniqueness : Prop :=
+  CPS_FunctionalEquation → CPS_EulerProduct → CPS_BoundedStrips →
+  ∀ s : ℂ, L_143a1 s = newform_143a1_L s
 
 /-! ── §1. Sub-surfaces ────────────────────────────────────────────────── -/
 
@@ -100,7 +122,7 @@ def Cremona_MultOne : Prop :=
       h_mult π_L (· s) : π_L s = newform_143a1_L s               (Cremona uniqueness)
       Composition: L_143a1 s = π_L s = newform_143a1_L s.
     SORRY: 0.  Classical trio.
-    Referee: #print axioms ArakelovRH.ConverseUniquenessClosure.converse_uniqueness_from_two -/
+    Referee: #print axioms RHKimSarnakDescent.Closure.ConverseUniquenessClosure.converse_uniqueness_from_two -/
 theorem converse_uniqueness_from_two
     (h_cps  : CPS_Thm33 DirichChar_143 twistedL_143a1)
     (h_mult : Cremona_MultOne newform_143a1_L) :
@@ -111,12 +133,4 @@ theorem converse_uniqueness_from_two
   rw [h_match s]
   exact h_mult π_L (fun s => h_match s) s
 
-/-- Reduction summary:
-    CPS_ConverseAndUniqueness (1 surface, ~45pp) is now:
-      → CPS_Thm33              (~35pp, full GL_2 converse theorem)
-      → Cremona_MultOne        (~10pp, strong multiplicity one + database)
-    converse_uniqueness_from_two: PROVED (0 sorry, classical trio).
-    SORRY: 0. -/
-theorem converse_uniqueness_reduction_complete : True := True.intro
-
-end ArakelovRH.ConverseUniquenessClosure
+end RHKimSarnakDescent.Closure.ConverseUniquenessClosure

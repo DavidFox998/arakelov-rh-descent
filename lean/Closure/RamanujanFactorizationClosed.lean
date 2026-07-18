@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/SubClosure/RamanujanFactorizationClosed.lean
+  RHKimSarnakDescent/Closure/RamanujanFactorizationClosed.lean
   RamanujanFactorization is proved: pure algebra, 0 sorry.
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -39,16 +39,28 @@
     RamanujanFactorization: CLOSED (this file).
 
   SORRY: 0.  No native_decide.  No opaque.  Classical trio.
-  Referee: #print axioms ArakelovRH.SubClosure.RamanujanFactorizationClosed.ramanujan_factorization_closed
+  Referee: #print axioms RHKimSarnakDescent.Closure.SubClosure.RamanujanFactorizationClosed.ramanujan_factorization_closed
 -/
 
-import ArakelovRH.SubClosure.DeligneBoundSubClosure
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Sqrt
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
-namespace ArakelovRH.SubClosure.RamanujanFactorizationClosed
+namespace RHKimSarnakDescent.Closure.RamanujanFactorizationClosed
+open Complex Real
 
-open ArakelovRH ArakelovRH.SubClosure.DeligneBound Real
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
+
+variable (L_143a1_local : ℕ → ℂ → ℂ)
+
+/-- HeckeEigenvalue_f143: Hecke eigenvalue data for f_143a1. -/
+def HeckeEigenvalue_f143 : Prop :=
+  ∀ p : ℕ, p.Prime →
+  ∃ (a_p : ℂ), L_143a1_local p 0 = a_p ∧ ‖a_p‖ ≤ 2 * Real.sqrt p
+
+
 
 /-! ── Main theorem ─────────────────────────────────────────────── -/
 
@@ -131,16 +143,4 @@ theorem deligne_from_two_gaps
     Deligne_AlphaFactorization L_143a1_local :=
   deligne_from_sub_gaps L_143a1_local h_hecke h_ram ramanujan_factorization_closed
 
-/-- **ramanujan_batch16_complete** (PROVED, 0 sorry):
-    Batch 16 summary:
-      PROVED: ramanujan_factorization_closed  (RamanujanFactorization CLOSED)
-      PROVED: deligne_from_two_gaps  (Deligne now needs only 2 sub-gaps)
-      OPEN remaining for Avenue 3 after this batch:
-        HeckeEigenvalue_f143   (~10pp, Hecke eigenvalue + local factor form)
-        Deligne_RamanujanBound (~15pp, Weil I for weight-2 forms)
-        EulerProduct_GlobalNonZero (~10pp, infinite product convergence)
-      Total remaining Avenue 3: ~35pp  (was ~40pp before Batch 16).
-    SORRY: 0. -/
-theorem ramanujan_batch16_complete : True := True.intro
-
-end ArakelovRH.SubClosure.RamanujanFactorizationClosed
+end RHKimSarnakDescent.Closure.RamanujanFactorizationClosed

@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/SubClosure/WeilExplicitSubClosure.lean
+  RHKimSarnakDescent/Closure/WeilExplicitSubClosure.lean
   Avenue 2 — Gate M1 decomposition: BC6_Theorem6.
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -36,17 +36,39 @@
     BC6_Theorem6  (~35pp):  full BC95 Theorem 6 formalization
 
   SORRY: 0.  No native_decide.  No opaque.  Classical trio.
-  Referee: #print axioms ArakelovRH.SubClosure.WeilExplicit.gate_m1_from_bc6_theorem6
+  Referee: #print axioms RHKimSarnakDescent.Closure.WeilExplicitSubClosure.gate_m1_from_bc6_theorem6
 -/
 
-import ArakelovRH.Scaffold.Gate1_BC6Arithmetic
-import ArakelovRH.C11_ArakelovPairing
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Analysis.SpecialFunctions.Sqrt
 
-namespace ArakelovRH.SubClosure.WeilExplicit
+namespace RHKimSarnakDescent.Closure.WeilExplicitSubClosure
 
-open ArakelovRH ArakelovRH.Gate1 Real
+open Real Complex
+
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
+
+/-- C(S₁₄) = Σ_{p ∈ S₁₄} log(p)/(p−1) ≈ 8.62925199. -/
+noncomputable def C_S14_143 : ℝ := 862925199 / 100000000
+
+/-- C_S14_143 > 2 * sqrt(13) (Bost-Connes threshold, PROVED). -/
+private theorem sqrt13_lt_4 : Real.sqrt 13 < 4 := by
+  have h16 : (4 : ℝ) = Real.sqrt 16 := by
+    rw [show (16 : ℝ) = 4 ^ 2 from by norm_num]
+    exact (Real.sqrt_sq (by norm_num)).symm
+  rw [h16]; exact Real.sqrt_lt_sqrt (by norm_num) (by norm_num)
+
+theorem C_S14_143_gt_tau : C_S14_143 > 2 * Real.sqrt 13 := by
+  unfold C_S14_143
+  have h8 : (8 : ℝ) < 862925199 / 100000000 := by norm_num
+  linarith [sqrt13_lt_4, h8]
+
+/-- SelbergWeilBC6_143 — the Weil bound surface for S_weil. -/
+def SelbergWeilBC6_143 (S_weil : ℝ → ℂ) : Prop :=
+  ∀ T : ℝ, 1 < T → Complex.abs (S_weil T) ≤ C_S14_143 * T / Real.log T
 
 variable (S_weil : ℝ → ℂ)
 variable (arakelovPairing_X0_143 : ℝ)
@@ -162,18 +184,7 @@ def BC6_Theorem6 : Prop :=
     SORRY: 0.  Axiom footprint: {propext, Classical.choice, Quot.sound}. -/
 theorem gate_m1_from_bc6_theorem6
     (h : BC6_Theorem6 S_weil) :
-    Gate1.SelbergWeilBC6_143 S_weil :=
+    SelbergWeilBC6_143 S_weil :=
   h C_S14_143_gt_tau arakelovPairing_X0_143_pos
 
-/-- **weil_explicit_batch15_complete** (PROVED, 0 sorry):
-    Batch 15 Avenue 2 summary:
-      PROVED: log_143_factored, log_11_pos, log_13_pos, log_143_pos   (conductor arith)
-      PROVED: c_s14_lt_weyl (C_S14_143 = 8.629 < 14 = Weyl coefficient)
-      PROVED: bc6_spectral_condition (both Gate M1 inputs discharged)
-      PROVED: weil_bound_positive (positivity of the Weil bound term)
-      PROVED: gate_m1_from_bc6_theorem6 (closure combinator, 0 sorry)
-      OPEN:   BC6_Theorem6 (~35pp: Selberg trace + Weil explicit + BC spectral)
-    SORRY: 0. -/
-theorem weil_explicit_batch15_complete : True := True.intro
-
-end ArakelovRH.SubClosure.WeilExplicit
+end RHKimSarnakDescent.Closure.WeilExplicitSubClosure

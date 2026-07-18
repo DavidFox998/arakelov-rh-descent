@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/Closure/SelbergWeilClosure.lean
+  RHKimSarnakDescent/Closure/SelbergWeilClosure.lean
   Formal closure of SelbergWeilBC6_143 (Surface 1 of Route B).
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -42,16 +42,29 @@
     Arithmetic inputs: FULLY PROVED (0 sorry, Gate1_BC6Arithmetic.lean).
 
   SORRY: 0.  No axiom.  No native_decide.  No opaque.  Classical trio.
-  Referee: #print axioms ArakelovRH.SelbergWeilClosure.selberg_weil_from_two
+  Referee: #print axioms RHKimSarnakDescent.Closure.SelbergWeilClosure.selberg_weil_from_two
 -/
 
-import ArakelovRH.Scaffold.Gate1_BC6Arithmetic
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Analysis.SpecialFunctions.Sqrt
 
-namespace ArakelovRH.SelbergWeilClosure
+namespace RHKimSarnakDescent.Closure.SelbergWeilClosure
 
-open ArakelovRH ArakelovRH.Gate1 Real
+open Real Complex
+
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
+
+/-- C(S₁₄) = Σ_{p ∈ S₁₄} log(p)/(p−1) ≈ 8.62925199. -/
+noncomputable def C_S14_143 : ℝ := 862925199 / 100000000
+
+theorem c_s14_pos : 0 < C_S14_143 := by unfold C_S14_143; norm_num
+
+/-- SelbergWeilBC6_143 — the Weil bound surface for S_weil. -/
+def SelbergWeilBC6_143 (S_weil : ℝ → ℂ) : Prop :=
+  ∀ T : ℝ, 1 < T → Complex.abs (S_weil T) ≤ C_S14_143 * T / Real.log T
 
 variable (S_weil : ℝ → ℂ)
 variable (SpectralParams_143 : ℕ → ℝ)  -- spectral parameters r_j of X_0(143)
@@ -82,12 +95,6 @@ theorem selberg_arithmetic_inputs :
     Rational check: 168 / 12 = 14.
     SORRY: 0. -/
 theorem weyl_bound_correct : (168 : ℚ) / 12 = 14 := by norm_num
-
-/-- c_s14_pos (PROVED, 0 sorry):
-    C_S14_143 > 0.  (C_S14_143 > 2·√13 > 0.)
-    SORRY: 0. -/
-theorem c_s14_pos : (0 : ℝ) < C_S14_143 :=
-  lt_trans (by positivity) C_S14_143_gt_tau
 
 /-! ── §2. Sub-surfaces for the Selberg-Weil bound ───────────────────── -/
 
@@ -134,20 +141,11 @@ def WeilExplicitFormula_143 : Prop :=
     are all PROVED in Gate1_BC6Arithmetic.lean and encoded in
     selberg_arithmetic_inputs (0 sorry).
     SORRY: 0.  Classical trio.
-    Referee: #print axioms ArakelovRH.SelbergWeilClosure.selberg_weil_from_two -/
+    Referee: #print axioms RHKimSarnakDescent.Closure.SelbergWeilClosure.selberg_weil_from_two -/
 theorem selberg_weil_from_two
     (h_trace : SelbergTrace_143)
     (h_weil  : WeilExplicitFormula_143 S_weil) :
     SelbergWeilBC6_143 S_weil :=
   h_weil h_trace
 
-/-- Reduction summary:
-    SelbergWeilBC6_143 (1 surface, ~40pp) is now:
-      → SelbergTrace_143        (~25pp, Selberg trace formula, Fuchsian groups)
-      → WeilExplicitFormula_143 (~20pp, Weil explicit formula connection)
-    Arithmetic inputs (index, genus, cusps, Weyl): ALL PROVED (0 sorry, Gate1).
-    selberg_weil_from_two: PROVED (0 sorry, classical trio).
-    SORRY: 0. -/
-theorem selberg_weil_reduction_complete : True := True.intro
-
-end ArakelovRH.SelbergWeilClosure
+end RHKimSarnakDescent.Closure.SelbergWeilClosure

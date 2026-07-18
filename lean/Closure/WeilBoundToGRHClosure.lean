@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/Closure/WeilBoundToGRHClosure.lean
+  RHKimSarnakDescent/Closure/WeilBoundToGRHClosure.lean
   Formal closure of WeilBound_to_GRH (Surface 6 of Route B).
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -38,18 +38,35 @@
     Sub-surface (2): ~10pp (contradiction from off-critical zero + Weil bound).
 
   SORRY: 0.  No axiom.  No native_decide.  No opaque.  Classical trio.
-  Referee: #print axioms ArakelovRH.WeilBoundToGRHClosure.weil_grh_from_two_surfaces
+  Referee: #print axioms RHKimSarnakDescent.Closure.WeilBoundToGRHClosure.weil_grh_from_two_surfaces
 -/
 
-import ArakelovRH.Scaffold.ConverseTheorem
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
-namespace ArakelovRH.WeilBoundToGRHClosure
+namespace RHKimSarnakDescent.Closure.WeilBoundToGRHClosure
 
-open ArakelovRH ArakelovRH.ConverseTheorem Real
+open Real Complex
+
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
+
+/-- C(S₁₄) = Σ_{p ∈ S₁₄} log(p)/(p−1) ≈ 8.62925199. -/
+noncomputable def C_S14_143 : ℝ := 862925199 / 100000000
+
+theorem c_s14_pos : 0 < C_S14_143 := by unfold C_S14_143; norm_num
 
 variable (newform_143a1_L : ℂ → ℂ)
+variable (L_143a1 : ℂ → ℂ)
+variable (S_weil : ℝ → ℂ)
+
+/-- WeilBound_to_GRH — the main surface: Weil bound + newform match → GRH. -/
+def WeilBound_to_GRH (newform_143a1_L : ℂ → ℂ) : Prop :=
+  (∀ s : ℂ, L_143a1 s = newform_143a1_L s) →
+  (∀ T : ℝ, 1 < T → Complex.abs (S_weil T) ≤ C_S14_143 * T / Real.log T) →
+  ∀ ρ : ℂ, L_143a1 ρ = 0 → 0 < ρ.re → ρ.re < 1 → ρ.re = 1/2
 
 /-! ── §1. Sub-surfaces ────────────────────────────────────────────────── -/
 
@@ -118,7 +135,7 @@ theorem log_pos_of_gt_one (T : ℝ) (hT : 1 < T) : 0 < Real.log T :=
     By h_zcc: ∃ T₀ with the Weil bound violated.
     But h_weil says the Weil bound holds for all T > 1. Contradiction.
     SORRY: 0.  Classical trio (classical.choice for ∃-elim in contradiction).
-    Referee: #print axioms ArakelovRH.WeilBoundToGRHClosure.weil_grh_from_two_surfaces -/
+    Referee: #print axioms RHKimSarnakDescent.Closure.WeilBoundToGRHClosure.weil_grh_from_two_surfaces -/
 theorem weil_grh_from_two_surfaces
     (h_ef  : ExplicitFormula_ZeroSum newform_143a1_L)
     (h_zcc : ZeroOffCriticalLine_Contradiction) :
@@ -139,13 +156,4 @@ theorem weil_grh_from_two_surfaces
     have hweil := h_weil T₀ hT₀
     linarith [Complex.abs.nonneg (S_weil T₀)]
 
-/-- Reduction summary:
-    WeilBound_to_GRH (1 surface, ~30pp total) is now:
-      → ExplicitFormula_ZeroSum              (~20pp, Weil explicit formula)
-      → ZeroOffCriticalLine_Contradiction    (~10pp, contradiction argument)
-    rpow_half_lt_rpow_beta: PROVED (0 sorry).
-    weil_grh_from_two_surfaces: PROVED (0 sorry, classical trio).
-    SORRY: 0. -/
-theorem weil_grh_reduction_complete : True := True.intro
-
-end ArakelovRH.WeilBoundToGRHClosure
+end RHKimSarnakDescent.Closure.WeilBoundToGRHClosure

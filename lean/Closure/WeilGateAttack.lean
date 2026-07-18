@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/SubClosure/WeilGateAttack.lean
+  RHKimSarnakDescent/Closure/WeilGateAttack.lean
   Batch 25: Weil gate -- ExplicitFormula_AtomicGap + WG_ZeroDensity.
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -8,20 +8,18 @@
   SORRY: 0.  No native_decide.  No opaque.  Classical trio only.
 -/
 
-import ArakelovRH.SubClosure.CPSSubgateDecomp
-import ArakelovRH.SubClosure.WeilExplicitSubClosure
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
-namespace ArakelovRH.WeilGateAttack
+namespace RHKimSarnakDescent.Closure.WeilGateAttack
 
-open ArakelovRH ArakelovRH.CPSSubgateDecomp
-open Complex Real
+open Real
 
-variable (DirichChar_143   : Type)
-variable (newform_143a1_L  : C -> C)
-variable (twistedL_143a1   : DirichChar_143 -> C -> C)
-variable (L_143a1          : C -> C)
-variable (S_weil           : R -> C)
+variable (DirichChar_143 : Type)
+variable (newform_143a1_L : ℂ → ℂ)
+variable (twistedL_143a1 : DirichChar_143 → ℂ → ℂ)
+variable (L_143a1 : ℂ → ℂ)
+variable (S_weil : ℝ → ℂ)
 
 /-! ## ExplicitFormula_AtomicGap decomposition -/
 
@@ -40,7 +38,7 @@ def WEF_ContourData : Prop :=
     Lean gap: residue theorem + zero sum convergence (~5pp). -/
 def WEF_ZeroData : Prop :=
   forall T : R, 0 < T ->
-    exists (zero_contrib : R -> C), forall x : R, 1 < x ->
+    exists (zero_contrib : ℝ → ℂ), forall x : ℝ, 1 < x ->
       True  -- placeholder: zero sum contribution
 
 /-- **WEF_ExplicitBridge** (~4pp): Contour + zeros -> explicit formula.
@@ -85,6 +83,4 @@ theorem wg_density_from_bc
     WG_ZeroDensity newform_143a1_L L_143a1 :=
   h_bridge h_count
 
-theorem weil_gate_batch25_complete : True := True.intro
-
-end ArakelovRH.WeilGateAttack
+end RHKimSarnakDescent.Closure.WeilGateAttack

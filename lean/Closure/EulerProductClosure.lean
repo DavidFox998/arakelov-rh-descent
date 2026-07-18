@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/Closure/EulerProductClosure.lean
+  RHKimSarnakDescent/Closure/EulerProductClosure.lean
   Formal closure of CPS_EulerProduct (Surface 2 of Route B).
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -33,17 +33,28 @@
     Local step: CLOSED (0 sorry).
 
   SORRY: 0.  No axiom.  No native_decide.  No opaque.  Classical trio.
-  Referee: #print axioms ArakelovRH.EulerProductClosure.euler_factor_nonzero_from_deligne
+  Referee: #print axioms RHKimSarnakDescent.Closure.EulerProductClosure.euler_factor_nonzero_from_deligne
 -/
 
-import ArakelovRH.Scaffold.ConverseTheorem
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
-namespace ArakelovRH.EulerProductClosure
+namespace RHKimSarnakDescent.Closure.EulerProductClosure
+open Complex Real
 
-open ArakelovRH ArakelovRH.ConverseTheorem Complex Real
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
+
+variable (L_143a1 : ℂ → ℂ)
+
+/-- CPS_EulerProduct: L-function nonzero for Re(s) > 3/2. -/
+def CPS_EulerProduct : Prop :=
+  ∀ s : ℂ, (3:ℝ)/2 < s.re → L_143a1 s ≠ 0
+
+
 
 /-! ── §1. Sub-surface (1): Deligne factorization ─────────────────────── -/
 
@@ -188,7 +199,7 @@ def EulerProduct_GlobalNonZero : Prop :=
     Proof: local non-vanishing proved by euler_factor_nonzero_from_deligne;
     global conclusion by h_glob.
     SORRY: 0.  Classical trio.
-    Referee: #print axioms ArakelovRH.EulerProductClosure.cps_euler_product_closed -/
+    Referee: #print axioms RHKimSarnakDescent.Closure.EulerProductClosure.cps_euler_product_closed -/
 theorem cps_euler_product_closed
     (h_del  : Deligne_AlphaFactorization L_143a1_local)
     (h_cpow : ∀ (p : ℕ), p.Prime → ∀ s : ℂ, ‖(p : ℂ) ^ (-s)‖ = (p : ℝ) ^ (-s.re))
@@ -197,13 +208,4 @@ theorem cps_euler_product_closed
   h_glob (fun p hp s hs =>
     euler_factor_nonzero_from_deligne L_143a1_local h_del h_cpow p hp s hs)
 
-/-- Reduction summary:
-    CPS_EulerProduct (1 open surface, ~35pp total) is now:
-      → Deligne_AlphaFactorization  (sub-surface 1, ~25pp, Hecke theory)
-      → CpowNormFormula             (sub-surface 1a, ~2pp, Mathlib API)
-      → EulerProduct_GlobalNonZero  (sub-surface 2, ~10pp, infinite products)
-    Local non-vanishing: FULLY PROVED (0 sorry).
-    SORRY: 0. -/
-theorem euler_product_reduction_complete : True := True.intro
-
-end ArakelovRH.EulerProductClosure
+end RHKimSarnakDescent.Closure.EulerProductClosure

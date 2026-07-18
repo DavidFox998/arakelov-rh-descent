@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/SubClosure/RSIdentityFullAttack.lean
+  RHKimSarnakDescent/Closure/RSIdentityFullAttack.lean
   Batch 25: RS Identity -- RS_Identity full sub-decomposition (IK Thm 5.13).
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -8,16 +8,15 @@
   SORRY: 0.  No native_decide.  No opaque.  Classical trio only.
 -/
 
-import ArakelovRH.Scaffold.IwaniecKowalski
+import Mathlib
 import Mathlib.NumberTheory.LSeries.RiemannZeta
 
-namespace ArakelovRH.RSIdentityFullAttack
+namespace RHKimSarnakDescent.Closure.RSIdentityFullAttack
 
-open ArakelovRH ArakelovRH.IwaniecKowalski
-open Complex Real
+open Real Complex
 
-variable (RankinSelberg_L : C -> C)
-variable (L_sym2_143     : C -> C)
+variable (RankinSelberg_L : ℂ → ℂ)
+variable (L_sym2_143 : ℂ → ℂ)
 
 /-- **RSI_LocalMatch** (~5pp): RS_p = zeta_p * L_sym2_p (local Euler factors).
     For each unramified p: RS_p(p^{-s}) = zeta_p(p^{-s}) * L_sym2_p(p^{-s}).
@@ -55,6 +54,4 @@ theorem rsi_global_from_local
     RS_Identity RankinSelberg_L L_sym2_143 :=
   h_bridge h_local h_conv
 
-theorem rsi_full_batch25_complete : True := True.intro
-
-end ArakelovRH.RSIdentityFullAttack
+end RHKimSarnakDescent.Closure.RSIdentityFullAttack

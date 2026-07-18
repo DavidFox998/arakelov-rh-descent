@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/SubClosure/SineGrowthSubClosure.lean
+  RHKimSarnakDescent/Closure/SineGrowthSubClosure.lean
   Sine modulus growth for the Gamma-Stirling reduction (Route B Surface 4).
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -39,7 +39,7 @@
 
   Clay rules: 0 sorry, 0 axiom, 0 native_decide, 0 opaque.
   SORRY: 0.  Classical trio: {propext, Classical.choice, Quot.sound}.
-  Referee: #print axioms ArakelovRH.SineGrowthSubClosure.sinh_ge_exp_div_three
+  Referee: #print axioms RHKimSarnakDescent.Closure.SineGrowthSubClosure.sinh_ge_exp_div_three
 -/
 
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
@@ -47,11 +47,24 @@ import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
 
-namespace ArakelovRH.SineGrowthSubClosure
+namespace RHKimSarnakDescent.Closure.SineGrowthSubClosure
 
-open Real Complex
+open Complex Real
 
 /-! == Section A: sinh lower bound via exp == -/
+
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
+
+variable (DirichChar_143 : Type)
+variable (twistedL_143a1 : DirichChar_143 → ℂ → ℂ)
+
+/-- CPS_BoundedStrips: L-function bounded in vertical strips. -/
+def CPS_BoundedStrips : Prop :=
+  ∀ χ : DirichChar_143, ∀ σ₁ σ₂ : ℝ, σ₁ < σ₂ →
+  ∃ C : ℝ, 0 < C ∧ ∀ s : ℂ, σ₁ ≤ s.re → s.re ≤ σ₂ → ‖twistedL_143a1 χ s‖ ≤ C
+
 
 /-- **sinh_ge_exp_div_three** (PROVED, 0 sorry):
     sinh(x) >= exp(x)/3 for x >= 1.
@@ -273,10 +286,4 @@ theorem gamma_stirling_from_reflection
           Complex.abs (Complex.sin (Real.pi * s)) := by
         rw [Real.exp_neg]; field_simp; ring
 
-/-- **sine_growth_reduction_complete** (PROVED, 0 sorry):
-    The sine growth component of the Stirling reduction is complete.
-    Remaining gap: lower bound on |Gamma(1-s)| in complementary strip.
-    SORRY: 0. -/
-theorem sine_growth_reduction_complete : True := True.intro
-
-end ArakelovRH.SineGrowthSubClosure
+end RHKimSarnakDescent.Closure.SineGrowthSubClosure

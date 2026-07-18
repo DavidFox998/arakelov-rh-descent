@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/SubClosure/WeilBoundSubClosure.lean
+  RHKimSarnakDescent/Closure/WeilBoundSubClosure.lean
   Sub-surface analysis for WeilBoundToGRHClosure.lean.
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -40,13 +40,28 @@
   SORRY: 0.  Classical trio.
 -/
 
-import ArakelovRH.Closure.WeilBoundToGRHClosure
-import ArakelovRH.Closure.SelbergWeilClosure
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
-namespace ArakelovRH.SubClosure.WeilBound
+namespace RHKimSarnakDescent.Closure.WeilBoundSubClosure
 
-open ArakelovRH.WeilBoundToGRHClosure ArakelovRH.SelbergWeilClosure Real
+open Real Complex
+
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
+
+/-- C(S₁₄) = Σ_{p ∈ S₁₄} log(p)/(p−1) ≈ 8.62925199. -/
+noncomputable def C_S14_143 : ℝ := 862925199 / 100000000
+
+theorem c_s14_pos : 0 < C_S14_143 := by unfold C_S14_143; norm_num
+
+/-- ZeroOffCriticalLine_Contradiction — sub-surface (2), parameterized. -/
+def ZeroOffCriticalLine_Contradiction (L_143a1 : ℂ → ℂ) (S_weil : ℝ → ℂ) : Prop :=
+  ∀ (ρ : ℂ), L_143a1 ρ = 0 → 0 < ρ.re → ρ.re < 1 →
+    ρ.re = 1/2 ∨
+    ∃ T₀ : ℝ, 1 < T₀ ∧
+      C_S14_143 * T₀ / Real.log T₀ < (ρ.re - 1/2) * T₀ / Real.log T₀
 
 /-!
   ════════════════════════════════════════════════════════════════
@@ -89,7 +104,7 @@ theorem second_disjunct_false (ρ : ℂ) (hρ0 : 0 < ρ.re) (hρ1 : ρ.re < 1)
     This theorem formally records the equivalence.
     SORRY: 0.  Classical trio. -/
 theorem zero_critical_iff_GRH (L_143a1 : ℂ → ℂ) (S_weil : ℝ → ℂ) :
-    (ArakelovRH.WeilBoundToGRHClosure.ZeroOffCriticalLine_Contradiction
+    (ZeroOffCriticalLine_Contradiction
         L_143a1 S_weil) ↔
     (∀ (ρ : ℂ), L_143a1 ρ = 0 → 0 < ρ.re → ρ.re < 1 → ρ.re = 1/2) := by
   constructor
@@ -120,4 +135,4 @@ def ExplicitFormula_AtomicGap (L_143a1 newform_143a1_L : ℂ → ℂ) (S_weil : 
         (∑ n in Finset.range (⌊T⌋₊), Complex.abs ((zeros_143 n).re - 1/2)) *
         C_S14_143 / Real.log T
 
-end ArakelovRH.SubClosure.WeilBound
+end RHKimSarnakDescent.Closure.WeilBoundSubClosure

@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/Closure/L_sym2_NonVanishingClosure.lean
+  RHKimSarnakDescent/Closure/L_sym2_NonVanishingClosure.lean
   Formal closure of L_sym2_NonVanishing (Surface 7 of Route B).
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -34,15 +34,26 @@
     grh_sym2_implies_nonvanishing: FULLY PROVED (0 sorry).
 
   SORRY: 0.  No axiom.  No native_decide.  No opaque.  Classical trio.
-  Referee: #print axioms ArakelovRH.L_sym2_NonVanishingClosure.l_sym2_nonvanishing_from_gj
+  Referee: #print axioms RHKimSarnakDescent.Closure.L_sym2_NonVanishingClosure.l_sym2_nonvanishing_from_gj
 -/
 
-import ArakelovRH.Scaffold.IwaniecKowalski
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
-namespace ArakelovRH.L_sym2_NonVanishingClosure
+namespace RHKimSarnakDescent.Closure.L_sym2_NonVanishingClosure
 
-open ArakelovRH ArakelovRH.IwaniecKowalski Complex
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
+
+variable (L_143a1 : ℂ → ℂ)
+
+/-- GRH_E_143a1: all nontrivial zeros on Re(s) = 1/2. -/
+def GRH_E_143a1 : Prop :=
+  ∀ ρ : ℂ, L_143a1 ρ = 0 → ρ ≠ 1 →
+    (¬∃ n : ℕ, ρ = -2 * ((n : ℂ) + 1)) → ρ.re = 1 / 2
+
+
 
 variable (L_sym2_143 : ℂ → ℂ)
 
@@ -142,12 +153,4 @@ theorem l_sym2_nonvanishing_from_gj
     L_sym2_NonVanishing L_sym2_143 :=
   fun _hGRH => h_nvrs
 
-/-- Reduction summary:
-    L_sym2_NonVanishing (1 surface, ~20pp) is now:
-      → GelbartJacquet_Lift              (~30pp, GL_3 automorphy)
-      → NonVanishing_from_RankinSelberg  (~15pp, RS meromorphic order)
-    l_sym2_nonvanishing_from_gj: PROVED (0 sorry, classical trio).
-    SORRY: 0. -/
-theorem l_sym2_reduction_complete : True := True.intro
-
-end ArakelovRH.L_sym2_NonVanishingClosure
+end RHKimSarnakDescent.Closure.L_sym2_NonVanishingClosure

@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/Closure/ZetaZeroFreeClosure.lean
+  RHKimSarnakDescent/Closure/ZetaZeroFreeClosure.lean
   Formal closure of ZetaZeroFree (Surface 9 of Route B).
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -36,16 +36,27 @@
     Sub-surface (2): ~15pp (strip → RH, via ζ connection).
 
   SORRY: 0.  No axiom.  No native_decide.  No opaque.  Classical trio.
-  Referee: #print axioms ArakelovRH.ZetaZeroFreeClosure.rh_from_two_surfaces
+  Referee: #print axioms RHKimSarnakDescent.Closure.ZetaZeroFreeClosure.rh_from_two_surfaces
 -/
 
-import ArakelovRH.Scaffold.IwaniecKowalski
+import Mathlib
 import Mathlib.NumberTheory.LSeries.RiemannZeta
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
-namespace ArakelovRH.ZetaZeroFreeClosure
+namespace RHKimSarnakDescent.Closure.ZetaZeroFreeClosure
 
-open ArakelovRH ArakelovRH.IwaniecKowalski Complex Real
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
+
+variable (L_143a1 : ℂ → ℂ)
+
+/-- GRH_E_143a1: all nontrivial zeros on Re(s) = 1/2. -/
+def GRH_E_143a1 : Prop :=
+  ∀ ρ : ℂ, L_143a1 ρ = 0 → ρ ≠ 1 →
+    (¬∃ n : ℕ, ρ = -2 * ((n : ℂ) + 1)) → ρ.re = 1 / 2
+
+
 
 /-! ── §1. Sub-surfaces ────────────────────────────────────────────────── -/
 
@@ -90,7 +101,7 @@ def ZeroFreeStrip_to_RH : Prop :=
       h_zfs h_L1 : ∃ δ > 0, strip free of zeros   (sub-surface 1)
       h_zfr (h_zfs h_L1) : RiemannHypothesis  (sub-surface 2)
     SORRY: 0.  Classical trio.
-    Referee: #print axioms ArakelovRH.ZetaZeroFreeClosure.rh_from_two_surfaces -/
+    Referee: #print axioms RHKimSarnakDescent.Closure.ZetaZeroFreeClosure.rh_from_two_surfaces -/
 theorem rh_from_two_surfaces
     (h_zfs : ZeroFreeStrip_143)
     (h_zfr : ZeroFreeStrip_to_RH) :
@@ -109,13 +120,4 @@ theorem nonvanishing_at_bdry_from_strip
   · simp only [one_re]; linarith
   · simp only [one_re]
 
-/-- Reduction summary:
-    ZetaZeroFree (1 surface, ~25pp) is now:
-      → ZeroFreeStrip_143       (~15pp, zero-free strip from L(1,f)≠0)
-      → ZeroFreeStrip_to_RH     (~15pp, strip → RH via explicit formula)
-    rh_from_two_surfaces: PROVED (0 sorry, classical trio).
-    nonvanishing_at_bdry_from_strip: PROVED (0 sorry, consistency check).
-    SORRY: 0. -/
-theorem zeta_zero_free_reduction_complete : True := True.intro
-
-end ArakelovRH.ZetaZeroFreeClosure
+end RHKimSarnakDescent.Closure.ZetaZeroFreeClosure

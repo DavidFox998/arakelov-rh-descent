@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/SubClosure/ZeroFreeStripSubClosure.lean
+  RHKimSarnakDescent/Closure/ZeroFreeStripSubClosure.lean
   Sub-closure for ZeroFreeStrip_143.
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -38,10 +38,19 @@
   SORRY: 0.  Classical trio.
 -/
 
-import ArakelovRH.Closure.ZetaZeroFreeClosure
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
-namespace ArakelovRH.SubClosure.ZeroFreeStrip
+namespace RHKimSarnakDescent.Closure.ZeroFreeStrip
+
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
+
+/-- ZeroFreeStrip_143: L(s, f_143a1) zero-free in a strip near Re(s) = 1. -/
+def ZeroFreeStrip_143 (L_fn : ℂ → ℂ) : Prop :=
+  ∃ δ : ℝ, 0 < δ ∧ ∀ s : ℂ, 1 - δ < s.re → s.re ≤ 1 → L_fn s ≠ 0
+
 
 variable (L_143a1 : ℂ -> ℂ)
 
@@ -71,16 +80,7 @@ def ZFR_143 : Prop :=
     They are definitionally equal.
     SORRY: 0. -/
 theorem strip_from_zfr (h : ZFR_143 L_143a1) :
-    ArakelovRH.ZetaZeroFreeClosure.ZeroFreeStrip_143 L_143a1 :=
+    ZeroFreeStrip_143 L_143a1 :=
   h
 
-/-- zero_free_reduction_complete:
-    ZeroFreeStrip_143 REDUCED to:
-      ZFR_143 (~15pp, de la Vallee Poussin for GL_2)  -- CORE gap
-      L143_HolomorphicAt1 (~5pp, analytic continuation)  -- AUXILIARY
-    CORRECTION from earlier attempt: continuity gives only a ball around s=1,
-    not the full half-strip. The correct reduction is ZFR_143.
-    SORRY: 0. -/
-theorem zero_free_reduction_complete : True := True.intro
-
-end ArakelovRH.SubClosure.ZeroFreeStrip
+end RHKimSarnakDescent.Closure.ZeroFreeStrip

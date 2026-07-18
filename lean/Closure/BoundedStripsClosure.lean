@@ -1,5 +1,5 @@
 /-
-  ArakelovRH/Closure/BoundedStripsClosure.lean
+  RHKimSarnakDescent/Closure/BoundedStripsClosure.lean
   Formal closure of CPS_BoundedStrips (Surface 3 of Route B).
   Author: David Fox.  Opera Numerorum.  June 2026.
 
@@ -39,17 +39,32 @@
     Sub-surface (3): ~10pp (Gamma factor growth, Stirling).
 
   SORRY: 0.  No axiom.  No native_decide.  No opaque.  Classical trio.
-  Referee: #print axioms ArakelovRH.BoundedStripsClosure.bounded_strips_from_three_surfaces
+  Referee: #print axioms RHKimSarnakDescent.Closure.BoundedStripsClosure.bounded_strips_from_three_surfaces
 -/
 
-import ArakelovRH.Scaffold.ConverseTheorem
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Topology.Algebra.Order.LiminfLimsup
 
-namespace ArakelovRH.BoundedStripsClosure
+namespace RHKimSarnakDescent.Closure.BoundedStripsClosure
+open Complex Real
 
-open ArakelovRH ArakelovRH.ConverseTheorem Complex Real
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
+
+/-- CPS_FunctionalEquation: twisted L-function satisfies functional equation. -/
+def CPS_FunctionalEquation : Prop :=
+  ∀ χ : DirichChar_143,
+  ∃ ε : ℂ, ‖ε‖ = 1 ∧ ∀ s : ℂ, twistedL_143a1 χ s = ε * twistedL_143a1 χ (2 - s)
+
+/-- CPS_BoundedStrips: L-function bounded in vertical strips. -/
+def CPS_BoundedStrips : Prop :=
+  ∀ χ : DirichChar_143, ∀ σ₁ σ₂ : ℝ, σ₁ < σ₂ →
+  ∃ C : ℝ, 0 < C ∧ ∀ s : ℂ, σ₁ ≤ s.re → s.re ≤ σ₂ → ‖twistedL_143a1 χ s‖ ≤ C
+
+
 
 /-! ── §1. Sub-surfaces for Bounded Strips ───────────────────────────── -/
 
@@ -164,15 +179,4 @@ theorem bounded_strips_from_three_surfaces
       exact le_of_lt (by positivity)⟩
     exact ⟨C_pl, hCpl, fun s hs1 hs2 => hpl s hs1 hs2⟩
 
-/-- Reduction summary:
-    CPS_BoundedStrips (1 surface, ~35pp total) is now:
-      → DirichletSeries_AbsConverge    (~10pp, Dirichlet series theory)
-      → CPS_FunctionalEquation         (shared surface 2, ~20pp)
-      → GammaFactor_VerticalGrowth     (~10pp, Stirling for Gamma)
-      → PhragmenLindelof_Strip         (~5pp, apply Mathlib PL theorem)
-    compact_strip_from_abs_conv: PROVED (0 sorry).
-    bounded_strips_from_three_surfaces: PROVED (0 sorry).
-    SORRY: 0. -/
-theorem bounded_strips_reduction_complete : True := True.intro
-
-end ArakelovRH.BoundedStripsClosure
+end RHKimSarnakDescent.Closure.BoundedStripsClosure
