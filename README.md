@@ -21,7 +21,7 @@ which forces GRH for L(s, X₀(143)), and the Langlands transfer
 descends this to RH for ζ(s).
 
 ---
-
+ 
 ## Honest Ledger
 
 ### Proved Theorems (main file + supporting files)
