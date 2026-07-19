@@ -1,4 +1,4 @@
--- Batch157QExpClose_Standalone_v2.lean
+-- Batch157QExpClose_Standalone.lean
 -- FINAL BATCH — 0 named open defs remain — NO TRIVIAL SUMMARY
 -- Replaces all_named_open_defs_closed : True := trivial with genuine chain
 
