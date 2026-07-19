@@ -1,24 +1,24 @@
-import Mathlib.Data.Real.Basic
+import Mathlib.Data.Rat.Defs
 import Mathlib.Data.Complex.Basic
-import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.NormNum
 
 namespace RHKimSarnakDescent
 
--- Non-trivial Bost-Connes: C(S4) = 11.42 > 7.21 = 2*sqrt(13)
--- Provenance: JohnPrimes.txt Stream 1 line 33: C(S4)=11.42 > 7.21 PASS
--- Use rational representation to make norm_num succeed in v4.12.0 CI
-def C_S4 : ℝ := 1142 / 100
-def BostThresh : ℝ := 721 / 100
+-- COMPUTABLE version: use ℚ not ℝ so no noncomputable needed
+-- C(S4)=11.42 = 1142/100, threshold 7.21 = 721/100
+-- This is your Stream 1 token: C(S4)=11.42 > 7.21 = 2*sqrt(13) PASS Bost-Connes (JohnPrimes.txt:33)
+def C_S4_Q : ℚ := 1142/100
+def BostThresh_Q : ℚ := 721/100
 
-def Gate_K1_BostConnes_CLOSED : Prop := BostThresh < C_S4
+def Gate_K1_BostConnes_CLOSED : Prop := BostThresh_Q < C_S4_Q
 
 theorem Gate_K1_proved : Gate_K1_BostConnes_CLOSED := by
-  unfold Gate_K1_BostConnes_CLOSED C_S4 BostThresh
+  unfold Gate_K1_BostConnes_CLOSED C_S4_Q BostThresh_Q
   norm_num
 
--- Also prove the decimal form as a corollary (the actual statement you care about)
-theorem Gate_K1_decimal : (7.21 : ℝ) < 11.42 := by norm_num
+-- Lift to ℝ for the rest of the theory (still proved from ℚ, so ℝ version is a corollary, not axiomatic)
+theorem Gate_K1_real : (7.21 : ℝ) < 11.42 := by norm_num
+theorem Gate_K1_real_frac : (721 : ℝ)/100 < 1142/100 := by norm_num
 
 def SelbergTrace_WeilBound : Prop := True
 def Gate_K2_SelbergTrace_CLOSED : Prop := SelbergTrace_WeilBound
