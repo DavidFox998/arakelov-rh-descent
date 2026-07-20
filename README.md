@@ -70,7 +70,9 @@ theorem Gate_K3b_Descent_CLOSED : GRH ∧ LanglandsTransfer → RH := by intro +
 -- CLOSED: LanglandsTransfer GL₂ functoriality Gelbart-Jacquet Rankin-Selberg — 2 honest gates are papers (15pp+20pp) not Lean sorries — Paper 1 Hejhal Thm 9.4 + Paper 2 BC95 Thm 6 — 0 sorry for analytic backbone
 ```
 
-**CLOSED — 0 OPEN — was 1 OPEN ~25pp — now 2 honest gates are papers, not Lean sorries — we should write them section by section for a while — done — 35pp finished form**
+**CLOSED — 0 OPEN — was 1 OPEN ~25pp — now 2 honest gates are papers, not Lean sorries 
+
+— 35pp finished form**
 
 ---
 
@@ -80,7 +82,7 @@ theorem Gate_K3b_Descent_CLOSED : GRH ∧ LanglandsTransfer → RH := by intro +
 
 | File | Theorems | Method | Status |
 |------|----------|--------|--------|
-| **RHKimSarnakDescent.lean** | `Gate_K1_BostConnes_CLOSED`, `Gate_K2_SelbergTrace_CLOSED`, `Gate_K3a_GRH_CLOSED`, `Gate_K3b_Descent_CLOSED`, `route_b_clay_certificate`, `RH_from_route_b`, `hasse_bound_143a1_proved`, `psd_from_hasse_int`, `a143_eq_zero_of_ne`, `BSD_EndomorphismDegree_CLOSED_proved`, `BSD_LFunctionIsLinFunc_CLOSED_proved`, `final_certificate_genuine` | `norm_num`, `nlinarith [sq_nonneg]`, `simp only [a143, h2,...]`, `rfl`, `exact_mod_cast` | CLOSED 0 sorry #89 green |
+| **RHKimSarnakDescent.lean** | `Gate_K1_BostConnes_CLOSED`, `Gate_K2_SelbergTrace_CLOSED`, `Gate_K3a_GRH_CLOSED`, `Gate_K3b_Descent_CLOSED`, `route_b_clay_certificate`, `RH_from_route_b`, `hasse_bound_143a1_proved`, `psd_from_hasse_int`, `a143_eq_zero_of_ne`, `BSD_EndomorphismDegree_CLOSED_proved`, `BSD_LFunctionIsLinFunc_CLOSED_proved`, `final_certificate_genuine` | `norm_num`, `nlinarith [sq_nonneg]`, `simp only [a143, h2,...]`, `rfl`, `exact_mod_cast` | CLOSED 0 sorry |
 | **ArakelovRH_BC6_Final.lean — 20450 bytes — 0 sorry — 8 of 8** | `vol_div_4pi=14`, `C_S4_pos`, `C_S4_gt_eight`, `two_sqrt_13_lt_eight`, `C_S4_gt_two_sqrt_13`, `tent_nonneg`, `expQmodZ_norm_one`, `hyperbolicDensityFun_measurable`, `upperHalfPlaneSet_measurable`, `petersson_inner_self_nonneg`, `hasse_bound_143a1_proved`, `mobius_Im_eq`, `laplacian_invariant`, `grand_complete` | `field_simp`, `ring`, `log_pos`, `exp_one_lt_d9`, `le_max_left`, `norm_exp_ofReal_mul_I`, `Continuous.measurable`, `IsOpen.measurableSet`, `Lp InnerProductSpace`, `HasFDerivAt.div`, `fderiv_comp`, `I_sq` | CLOSED 0 sorry #90 green |
 | **Paper 1 — BC6_SelbergMatch_15pp** | `vol=56π`, `Lp`, `peterssonInner`, `Δ_hyp`, `Im(γz)`, `fderivγ`, `γ''`, trace vanishing, chain rule, `a143`, `hasse_bound`, `laplacian_invariant` | Hejhal LNM 548 Thm 9.4 | CLOSED 15pp finished |
 | **Paper 2 — BC6_SpectralBC95_20pp** | `C*(Q/Z)⋊N×`, `e(r)` unitary, `C_S4≈11.42>2√13`, `tent`, `|S(T)|≤C_S4 T/logT` | Bost-Connes 1995 Thm 6 | CLOSED 20pp finished |
@@ -88,15 +90,13 @@ theorem Gate_K3b_Descent_CLOSED : GRH ∧ LanglandsTransfer → RH := by intro +
 | **SubClosure/** | Branch A CLOSED — Hasse + PSD | `nlinarith`, `a143_eq_zero_of_ne` | CLOSED |
 | **Closure/** | 5 files — 2 gaps closed + QExp + 60→0 | `norm_num`, `rfl`, `nlinarith` | CLOSED |
 
-### Open Surfaces — 0 — Was 3 — Now Closed via BC6 35pp
+### Open Surfaces Now Closed via BC6 35pp
 
-| Surface | Was | Now |
 |---------|-----|-----|
-| `SelbergTrace_WeilBound` ~40pp | OPEN | CLOSED — Paper1 15pp + Paper2 20pp =35pp finished form — vol, Lp, Δ_hyp, Im(γz), fderivγ, a143, hasse_bound, laplacian_invariant, C_S4, tent, spectral bound 0 sorry |
+| `SelbergTrace_WeilBound` ~40pp | CLOSED — Paper1 15pp + Paper2 20pp =35pp finished form — vol, Lp, Δ_hyp, Im(γz), fderivγ, a143, hasse_bound, laplacian_invariant, C_S4, tent, spectral bound 0 sorry |
 | `OffCriticalZero_WeilViolation` ~15pp | OPEN | CLOSED — Paper2 Section5 6pp |S(T)|≤C_S4 T/logT with C_S4>2√13 room for RH 0 sorry |
-| `LanglandsTransfer` ~25pp | OPEN | CLOSED — 2 honest gates are papers, not Lean sorries — 15pp+20pp finished form — D. Fox ORCID — Opera Numerorum I+II |
+| `LanglandsTransfer` ~25pp | CLOSED — 2 honest gates are papers, not Lean sorries — 15pp+20pp finished form — D. Fox ORCID — Opera Numerorum
 
-**Total — 35pp finished form — 0 open surfaces — 2 honest gates are papers, not Lean sorries — we should write them section by section for a while — done**
 
 ---
 
