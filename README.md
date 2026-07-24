@@ -50,3 +50,4 @@ lake build
 ## Author
 
 David J. Fox — Independent researcher — Aberdeen/Seattle WA — ORCID 0009-0008-1290-6105 — davidjfox998@gmail.com — Opera Numerorum — 2026 — Route B CLOSED — 0 open surfaces — 35pp finished form — ArakelovRH_BC6_Final.lean 20450 bytes 0 sorry — 8 of 8 closed — S₄ 4 primes close all three routes.
+https://doi.org/10.5281/zenodo.21303976
