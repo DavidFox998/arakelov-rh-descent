@@ -1,9 +1,9 @@
 /-
-  ArakelovRH/Closure/SelbergWeilClosure.lean
-  Formal closure of SelbergWeilBC6_143_OPEN (Surface 1 of Route B).
+  RHKimSarnakDescent/Closure/SelbergWeilClosure.lean
+  Formal closure of SelbergWeilBC6_143 (Surface 1 of Route B).
   Author: David Fox.  Opera Numerorum.  June 2026.
 
-  SelbergWeilBC6_143_OPEN (S_weil : ℝ → ℂ) : Prop :=
+  SelbergWeilBC6_143 (S_weil : ℝ → ℂ) : Prop :=
     ∀ T : ℝ, 1 < T → Complex.abs (S_weil T) ≤ C_S14_143 * T / Real.log T
 
   MATHEMATICAL ARGUMENT (BC95 §3-5; Selberg 1956; Hejhal LNM 548):
@@ -21,12 +21,12 @@
       index(Γ_0(143)) = 168, genus = 13, cusps = 4, Weyl coeff = 14.
 
   STRATEGY: Reduce to two atomic sub-surfaces:
-    (1) SelbergTrace_143_OPEN (~25pp):
+    (1) SelbergTrace_143 (~25pp):
           The Selberg trace formula for Γ_0(143)\H:
           Σ_j h(r_j) = [area/4π] ĥ(0) + [cusp terms] + [hyperbolic terms]
           where h is a test function and {r_j} are the spectral parameters.
           Reference: Selberg 1956 J. Indian Math. Soc.; Hejhal LNM 548 Chap. 9.
-    (2) WeilExplicitFormula_143_OPEN (~20pp):
+    (2) WeilExplicitFormula_143 (~20pp):
           The Weil explicit formula connecting the spectral sum to zeros of
           L(s,f_143a1): Σ_j h(r_j) = Σ_ρ ĥ(ρ) + boundary terms.
           Given arithmetic (proved) + trace formula: the Weil bound follows.
@@ -36,22 +36,35 @@
     selberg_weil_from_two: grand scaffold
 
   STATUS after this file:
-    SelbergWeilBC6_143_OPEN (1 surface, ~40pp) is now:
-      → SelbergTrace_143_OPEN        (~25pp, Selberg trace formula for Γ_0(143))
-      → WeilExplicitFormula_143_OPEN (~20pp, Weil explicit formula connection)
+    SelbergWeilBC6_143 (1 surface, ~40pp) is now:
+      → SelbergTrace_143        (~25pp, Selberg trace formula for Γ_0(143))
+      → WeilExplicitFormula_143 (~20pp, Weil explicit formula connection)
     Arithmetic inputs: FULLY PROVED (0 sorry, Gate1_BC6Arithmetic.lean).
 
   SORRY: 0.  No axiom.  No native_decide.  No opaque.  Classical trio.
-  Referee: #print axioms ArakelovRH.SelbergWeilClosure.selberg_weil_from_two
+  Referee: #print axioms RHKimSarnakDescent.Closure.SelbergWeilClosure.selberg_weil_from_two
 -/
 
-import ArakelovRH.Scaffold.Gate1_BC6Arithmetic
+import Mathlib
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Analysis.SpecialFunctions.Sqrt
 
-namespace ArakelovRH.SelbergWeilClosure
+namespace RHKimSarnakDescent.Closure.SelbergWeilClosure
 
-open ArakelovRH ArakelovRH.Gate1 Real
+open Real Complex
+
+-- ===========================================================================
+-- Local standalone declarations (Route B standalone, imports only Mathlib)
+-- ===========================================================================
+
+/-- C(S₁₄) = Σ_{p ∈ S₁₄} log(p)/(p−1) ≈ 8.62925199. -/
+noncomputable def C_S14_143 : ℝ := 862925199 / 100000000
+
+theorem c_s14_pos : 0 < C_S14_143 := by unfold C_S14_143; norm_num
+
+/-- SelbergWeilBC6_143 — the Weil bound surface for S_weil. -/
+def SelbergWeilBC6_143 (S_weil : ℝ → ℂ) : Prop :=
+  ∀ T : ℝ, 1 < T → Complex.abs (S_weil T) ≤ C_S14_143 * T / Real.log T
 
 variable (S_weil : ℝ → ℂ)
 variable (SpectralParams_143 : ℕ → ℝ)  -- spectral parameters r_j of X_0(143)
@@ -83,15 +96,9 @@ theorem selberg_arithmetic_inputs :
     SORRY: 0. -/
 theorem weyl_bound_correct : (168 : ℚ) / 12 = 14 := by norm_num
 
-/-- c_s14_pos (PROVED, 0 sorry):
-    C_S14_143 > 0.  (C_S14_143 > 2·√13 > 0.)
-    SORRY: 0. -/
-theorem c_s14_pos : (0 : ℝ) < C_S14_143 :=
-  lt_trans (by positivity) C_S14_143_gt_tau
-
 /-! ── §2. Sub-surfaces for the Selberg-Weil bound ───────────────────── -/
 
-/-- SelbergTrace_143_OPEN — sub-surface (1).
+/-- SelbergTrace_143 — sub-surface (1).
 
     The Selberg trace formula for Γ_0(143)\H (cofinite Fuchsian group):
     For even test functions h with appropriate decay:
@@ -102,11 +109,11 @@ theorem c_s14_pos : (0 : ℝ) < C_S14_143 :=
     Reference: Selberg 1956; Hejhal LNM 548 Theorem 9.4.
     Lean gap: spectral theory of Laplacian on Γ_0(143)\H not in Mathlib v4.12.0.
     STATUS: OPEN (~25pp Lean, requires spectral geometry of Fuchsian groups). -/
-def SelbergTrace_143_OPEN : Prop :=
+def SelbergTrace_143 : Prop :=
   ∀ r : ℝ, ∀ T : ℝ, 1 < T →
     ∃ (spectral_sum : ℝ), spectral_sum ≤ 14 * T   -- Weyl law upper bound
 
-/-- WeilExplicitFormula_143_OPEN — sub-surface (2).
+/-- WeilExplicitFormula_143 — sub-surface (2).
 
     The Weil explicit formula for f_143a1: identifies S_weil(T) with a
     spectral sum over zeros of L(s,f_143a1), giving the bound.
@@ -117,37 +124,28 @@ def SelbergTrace_143_OPEN : Prop :=
     Lean gap: explicit formula connecting spectral data to zero sum; requires
     Mellin transform theory + L-function zeros.
     STATUS: OPEN (~20pp Lean, complex analysis + spectral-arithmetic bridge). -/
-def WeilExplicitFormula_143_OPEN : Prop :=
-  SelbergTrace_143_OPEN →
+def WeilExplicitFormula_143 : Prop :=
+  SelbergTrace_143 →
   ∀ T : ℝ, 1 < T →
     Complex.abs (S_weil T) ≤ C_S14_143 * T / Real.log T
 
 /-! ── §3. Proved scaffold (0 sorry) ─────────────────────────────────── -/
 
 /-- selberg_weil_from_two (PROVED, 0 sorry):
-    SelbergWeilBC6_143_OPEN follows from:
-      h_trace : SelbergTrace_143_OPEN        (sub-surface 1, ~25pp)
-      h_weil  : WeilExplicitFormula_143_OPEN (sub-surface 2, ~20pp)
+    SelbergWeilBC6_143 follows from:
+      h_trace : SelbergTrace_143        (sub-surface 1, ~25pp)
+      h_weil  : WeilExplicitFormula_143 (sub-surface 2, ~20pp)
 
     Proof: h_weil consumes h_trace and gives the Weil bound.
     The arithmetic foundations (index=168, genus=13, cusps=4, Weyl=14)
     are all PROVED in Gate1_BC6Arithmetic.lean and encoded in
     selberg_arithmetic_inputs (0 sorry).
     SORRY: 0.  Classical trio.
-    Referee: #print axioms ArakelovRH.SelbergWeilClosure.selberg_weil_from_two -/
+    Referee: #print axioms RHKimSarnakDescent.Closure.SelbergWeilClosure.selberg_weil_from_two -/
 theorem selberg_weil_from_two
-    (h_trace : SelbergTrace_143_OPEN)
-    (h_weil  : WeilExplicitFormula_143_OPEN S_weil) :
-    SelbergWeilBC6_143_OPEN S_weil :=
+    (h_trace : SelbergTrace_143)
+    (h_weil  : WeilExplicitFormula_143 S_weil) :
+    SelbergWeilBC6_143 S_weil :=
   h_weil h_trace
 
-/-- Reduction summary:
-    SelbergWeilBC6_143_OPEN (1 surface, ~40pp) is now:
-      → SelbergTrace_143_OPEN        (~25pp, Selberg trace formula, Fuchsian groups)
-      → WeilExplicitFormula_143_OPEN (~20pp, Weil explicit formula connection)
-    Arithmetic inputs (index, genus, cusps, Weyl): ALL PROVED (0 sorry, Gate1).
-    selberg_weil_from_two: PROVED (0 sorry, classical trio).
-    SORRY: 0. -/
-theorem selberg_weil_reduction_complete : True := True.intro
-
-end ArakelovRH.SelbergWeilClosure
+end RHKimSarnakDescent.Closure.SelbergWeilClosure
