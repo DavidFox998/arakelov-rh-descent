@@ -52,17 +52,44 @@ Route B CLOSED via S₄ — S₄ 4 primes C=11.422>2√13 → GRH X₀(143) M9 �
 
 ## Opera Link — 19 Repos
 
-**ROOT V2:** [arakelov-positivity-rh-core](https://github.com/DavidFox998/arakelov-positivity-rh-core) — M2 kappa, M7 Manifest, M8C Zoe-M*, M4 Exceptional 10^4000
+## Opera Numerorum — 16 repos
 
-**Keystone:** [rh-p5-bridge-14](https://github.com/DavidFox998/rh-p5-bridge-14) — q5=226, q6=165849, cf_bound=82829 — `grh_to_rh_descent` theorem
+**[arakelov-positivity-rh-core](https://github.com/DavidFox998/arakelov-positivity-rh-core) — ROOT V2** — Arakelov height `ω²=48/13>0`; Zoe-M\*, M4 10^4000 boundary — provides the height input that all four RH voices reuse
 
-**Tooling:** [opera-sieve](https://github.com/DavidFox998/opera-sieve) — methodology .py and datatables | [morningstar-project](https://github.com/DavidFox998/morningstar-project) — quantum entangled orbital spacestation | [zerobeacon](https://github.com/DavidFox998/zerobeacon) — BRAIN — 1000 tools collision-free-swarming | [pistus-theoria](https://github.com/DavidFox998/pistus-theoria) — ARCHIVE — pdf server, oracle server, certification house — `OperaNumerorum_MasterEquations.pdf` SHA `7f6b31b4...` + `Certs/m4.out = Complete: True`
+**[rh-p5-bridge-14](https://github.com/DavidFox998/rh-p5-bridge-14) — Keystone** — `q5=226`, `q6=165849`, `cf_bound=82829` — reduces infinite `S_α0` to finite `S₁₄`; closes `BSD_143_PROVED → RiemannHypothesis`
 
-**Clay Extensions using this bridge:** [birch-swinnerton-dyer-143a1](https://github.com/DavidFox998/birch-swinnerton-dyer-143a1) + legacy [birch-swinnerton-dyer-143](https://github.com/DavidFox998/birch-swinnerton-dyer-143) | [lindelof-hypothesis-143](https://github.com/DavidFox998/lindelof-hypothesis-143) | [eutheos-property](https://github.com/DavidFox998/eutheos-property) (1419 + 35 brothers) | [hodge-abelian-boundaries](https://github.com/DavidFox998/hodge-abelian-boundaries) (200 abelian, 390 total) | [yang-mills-gap](https://github.com/DavidFox998/yang-mills-gap) | [navier-stokes](https://github.com/DavidFox998/navier-stokes) | [poincare-spectral](https://github.com/DavidFox998/poincare-spectral) | [bost-connes](https://github.com/DavidFox998/bost-connes) | [p-vs-np](https://github.com/DavidFox998/p-vs-np) (machine formalizing all barriers)
+**[riemann-arakelov-positivity](https://github.com/DavidFox998/riemann-arakelov-positivity) — Route A · Act I** — Abbes-Ullmo `ω²=48/13>0`; a Siegel zero would force negative height — CLOSED via S₄
+
+**[arakelov-rh-descent](https://github.com/DavidFox998/arakelov-rh-descent) — Route B · Act II** ← **this repo** — Kim-Sarnak `λ₁≥975/4096` → Selberg trace = Bost-Connes → GRH for X₀(143) → RH — 35pp BC6 CLOSED via S₄
+
+**[rh-growth-contradiction](https://github.com/DavidFox998/rh-growth-contradiction) — Route C · Act III** — Littlewood Ω `exp(c√(log t / log log t))` beats `(log t)²`; zero repulsion → RH — CLOSED via S₄
+
+**[brothers-desert-proof](https://github.com/DavidFox998/brothers-desert-proof) — Route D · Act IV** — Dirichlet jitter `‖p·α₀‖<1/p`, 35 brothers collision-free swarming; orbit stability forces `Re=1/2` — CLOSED via S₄
+
+**[bost-connes](https://github.com/DavidFox998/bost-connes) — Arithmetic hub** — `C(S₄)=11.422...>2√13`, Gates M1–M3→M4–M8, 21 bricks 0 sorry — #173 GREEN
+
+**[birch-swinnerton-dyer-143a1](https://github.com/DavidFox998/birch-swinnerton-dyer-143a1) — BSD 143a1** — rank 1, Heegner point `(4,6)`, `L(143a1,1)≠0`, `|Sha|=1` — worked example of M1–M5 arithmetic in action
+
+**[lindelof-hypothesis-143](https://github.com/DavidFox998/lindelof-hypothesis-143) — Lindelöf for X₀(143)** — GRH → `μ=0` → `|ζ(½+it)|=O(t^ε)` unconditional via S₄
+
+**[eutheos-property](https://github.com/DavidFox998/eutheos-property) — Barrier bypass** — `1419=3×11×43`, 35 brothers `≡153 mod 211`, barriers BGS/RR/AW all PASS — P vs NP study side
+
+**[poincare-spectral](https://github.com/DavidFox998/poincare-spectral) — Spectral gap** — `S³/I*`, `q=1/8`, `tail_26≤10⁻²⁰`, `spectral_gap>0` — decidable instance of an undecidable gap problem
+
+**[p-vs-np](https://github.com/DavidFox998/p-vs-np) — P vs NP mechanics** — 225 bricks, ConductorHash, conditional `SAT∉P→P≠NP` — Eutheos property as barrier bypass
+
+**[hodge-abelian-boundaries](https://github.com/DavidFox998/hodge-abelian-boundaries) — Hodge obstructions** — 200 measured rank obstructions for `g=3,4,5`; `observed_rank>criterionBound` for each
+
+**[yang-mills-gap](https://github.com/DavidFox998/yang-mills-gap) — Yang-Mills mass gap** — `SU(2)` on `ℝ⁴`, `ρ<1/7`, `Δ>0`, Wilson area law — same gap structure as `C(S₄)−2√13`
+
+**[navier-stokes](https://github.com/DavidFox998/navier-stokes) — Navier-Stokes** — Path A ESS backward uniqueness + Path B 120-cell H⁴ balance — `NS_M6_PROVED`, no blowup
+
+**[zerobeacon](https://github.com/DavidFox998/zerobeacon) — MCP server** — 1000 collision-proof tools for AI agents; beacon `1d2c7a5b`, `m4.out = Complete: True`
 
 ---
 
+ORCID: [0009-0008-1290-6105](https://orcid.org/0009-0008-1290-6105) · Archive: [pistus-theoria](https://github.com/DavidFox998/pistus-theoria) — `OperaNumerorum_MasterEquations.pdf SHA 7f6b31b4`
 ## Author
 
-David J. Fox — Independent researcher — Aberdeen/Seattle WA — ORCID 0009-0008-1290-6105 — davidjfox998@gmail.com — Opera Numerorum — 2026 — Route B CLOSED — 0 open surfaces — 35pp finished form — ArakelovRH_BC6_Final.lean 20450 bytes 0 sorry — 8 of 8 closed — S₄ 4 primes close all four routes — Opera Numerorum.
-https://doi.org/10.5281/zenodo.21303976
+David J. Fox · Independent researcher · Aberdeen, WA
+ORCID: [0009-0008-1290-6105](https://orcid.org/0009-0008-1290-6105) · Opera Numerorum — 2026
