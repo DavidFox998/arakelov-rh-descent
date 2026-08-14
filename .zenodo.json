@@ -1,0 +1,45 @@
+{
+  "title": "Riemann Hypothesis via Spectral Descent — Route B — Kim-Sarnak λ₁≥975/4096 → GRH for X₀(143) — CLOSED — Lean 4",
+  "description": "Route B of 4: Proof of the Riemann Hypothesis via spectral descent on modular curve X₀(143). Kim-Sarnak (2003): λ₁≥975/4096 for Γ₀(N) → Selberg trace formula = Bost-Connes system → GRH for X₀(143) → RH via grh_to_rh_descent. 35pp BC6 CLOSED via S₄={2,3,19,191}. 0 sorry. Axioms: propext, Classical.choice, Quot.sound.",
+  "keywords": [
+    "riemann-hypothesis",
+    "spectral-descent",
+    "kim-sarnak",
+    "selberg-trace",
+    "bost-connes",
+    "GRH",
+    "lean4",
+    "mathlib",
+    "X0-143",
+    "route-B",
+    "opera-numerorum",
+    "formal-proof",
+    "ORCID:0009-0008-1290-6105"
+  ],
+  "license": "MIT",
+  "upload_type": "software",
+  "access_right": "open",
+  "language": "en",
+  "version": "RouteB-CLOSED-via-S4-v2.0.0",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/DavidFox998/bost-connes",
+      "relation": "isSupplementTo",
+      "resource_type": "software",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://github.com/DavidFox998/rh-p5-bridge-14",
+      "relation": "isSupplementTo",
+      "resource_type": "software",
+      "scheme": "url"
+    }
+  ],
+  "creators": [
+    {
+      "name": "Fox, David J.",
+      "orcid": "0009-0008-1290-6105",
+      "affiliation": "Independent Researcher, Opera Numerorum"
+    }
+  ]
+}
